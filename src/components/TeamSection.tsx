@@ -8,13 +8,13 @@ const team = [
     name: "Robert Beasock",
     role: "Founder",
     linkedin: "https://www.linkedin.com/in/robert-beasock-00316027/",
-    photo: "/team/robert.jpg", // local image or absolute URL
+    photo: "/team/Robert.jpg", // local image or absolute URL
   },
   {
     name: "John O'Connor",
     role: "Co-Founder",
     linkedin: "https://linkedin.com/in/john-o-connor-01940a82",
-    photo: "/team/john.jpg",
+    photo: "/team/John.jpg",
   },
   {
     name: "Mykhailo Liashenko",
