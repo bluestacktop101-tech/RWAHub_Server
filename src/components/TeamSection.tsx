@@ -8,19 +8,19 @@ const team = [
     name: "Robert Beasock",
     role: "Founder",
     linkedin: "https://www.linkedin.com/in/robert-beasock-00316027/",
-    photo: "@/team/robert.jpg", // local image or absolute URL
+    photo: "/team/robert.jpg", // local image or absolute URL
   },
   {
     name: "John O'Connor",
     role: "Co-Founder",
     linkedin: "https://linkedin.com/in/john-o-connor-01940a82",
-    photo: "@/team/john.jpg",
+    photo: "/team/john.jpg",
   },
   {
     name: "Mykhailo Liashenko",
     role: "Chief Technology Officer",
     linkedin: "https://www.linkedin.com/in/mykhailo-liashenko-633615348/",
-    photo: "@/team/mykhailo.jpg",
+    photo: "/team/mykhailo.jpg",
   },
 ];
 
