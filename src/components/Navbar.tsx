@@ -1,55 +1,72 @@
 import { useState } from "react";
+import { Link, useLocation } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Assets", href: "#assets" },
-  { label: "Technology", href: "#technology" },
-  { label: "Team", href: "#team" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", to: "/" as const },
+  { label: "About", to: "/about" as const },
+  { label: "Services", to: "/services" as const },
+  { label: "Assets", to: "/assets" as const },
+  { label: "Technology", to: "/technology" as const },
+  { label: "Team", to: "/team" as const },
+  { label: "Hiring", to: "/hiring" as const },
+  { label: "Contact", to: "/contact" as const },
 ];
 
-const Navbar = () => {
+export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-glass">
-      <div className="container mx-auto flex items-center justify-between py-4">
-        <a href="#home" className="font-display text-xl font-bold tracking-tight flex items-center gap-1.5">
-          <span className="text-gradient-primary">RWA</span>
-          <span className="text-foreground">Hub</span>
-        </a>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 md:h-20">
+          <Link to="/" className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center">
+              <span className="font-display font-bold text-primary-foreground text-sm">R</span>
+            </div>
+            <span className="font-display font-semibold text-lg text-foreground">
+              RWA <span className="text-gradient-primary">Hub</span>
+            </span>
+          </Link>
 
-        {/* Desktop */}
-        <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200"
-            >
-              {link.label}
-            </a>
-          ))}
+          {/* White Paper tag */}
           <a
-            href="#contact"
-            className="bg-gradient-primary text-primary-foreground px-5 py-2 rounded-lg text-sm font-semibold hover:opacity-90 transition-opacity"
+            href="https://www.notion.so/RWAHub-Whitepaper-34203938ce42804faca5cffd0ad749cc"
+            className="hidden lg:inline-flex items-center gap-1.5 ml-3 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold border border-primary/20 hover:bg-primary/20 transition-colors"
           >
-            Get Started
+            📄 White Paper
           </a>
-        </div>
 
-        {/* Mobile toggle */}
-        <button
-          className="md:hidden text-foreground"
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle menu"
-        >
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+          {/* Desktop nav */}
+          <div className="hidden md:flex items-center gap-1">
+            {navLinks.map((link) => {
+              const isActive = location.pathname === link.to || (link.to !== "/" && location.pathname.startsWith(link.to));
+              return (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
+                    isActive
+                      ? "text-primary"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* Mobile toggle */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden p-2 text-foreground"
+          >
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
@@ -59,32 +76,30 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-glass overflow-hidden"
+            className="md:hidden bg-card border-t border-border overflow-hidden"
           >
-            <div className="container mx-auto py-4 flex flex-col gap-4">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
-                >
-                  {link.label}
-                </a>
-              ))}
-              <a
-                href="#contact"
-                onClick={() => setIsOpen(false)}
-                className="bg-gradient-primary text-primary-foreground px-5 py-2 rounded-lg text-sm font-semibold text-center"
-              >
-                Get Started
-              </a>
+            <div className="px-4 py-4 space-y-1">
+              {navLinks.map((link) => {
+                const isActive = location.pathname === link.to;
+                return (
+                  <Link
+                    key={link.to}
+                    to={link.to}
+                    onClick={() => setIsOpen(false)}
+                    className={`block px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                      isActive
+                        ? "text-primary bg-secondary"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
             </div>
           </motion.div>
         )}
       </AnimatePresence>
     </nav>
   );
-};
-
-export default Navbar;
+}

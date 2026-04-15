@@ -1,87 +1,62 @@
+import { Link } from "@tanstack/react-router";
 import { Linkedin, Twitter } from "lucide-react";
 
-const Footer = () => {
+export default function Footer() {
   return (
-    <footer className="border-t border-border py-12 px-4 md:px-8 bg-navy-deep">
-      <div className="container mx-auto">
-        <div className="grid md:grid-cols-4 gap-8 mb-10">
-          <div>
-            <a href="#home" className="font-display text-xl font-bold tracking-tight flex items-center gap-1.5">
-              <span className="text-gradient-primary">RWA</span>
-              <span className="text-foreground">Hub</span>
-            </a>
-            <p className="text-muted-foreground text-sm mt-3 leading-relaxed">
-              Making every possible asset available to anyone, anywhere — powered by blockchain technology.
+    <footer className="bg-navy-deep border-t border-border">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          {/* Brand */}
+          <div className="md:col-span-2">
+            <Link to="/" className="flex items-center gap-2 mb-4">
+              <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center">
+                <span className="font-display font-bold text-primary-foreground text-sm">R</span>
+              </div>
+              <span className="font-display font-semibold text-lg text-foreground">
+                RWA <span className="text-gradient-primary">Hub</span>
+              </span>
+            </Link>
+            <p className="text-muted-foreground text-sm max-w-md">
+              A complete, integrated ecosystem supporting the entire real-world asset lifecycle — from tokenization to trading, with full regulatory compliance.
             </p>
-          </div>
-
-          <div>
-            <h4 className="font-display font-semibold text-sm mb-4">Ecosystem</h4>
-            <div className="space-y-2">
-              {["Insights", "Intelligence", "Integrations", "Investments", "Infrastructure"].map((link) => (
-                <a key={link} href="#services" className="block text-sm text-muted-foreground hover:text-primary transition-colors">
-                  {link}
-                </a>
-              ))}
+            <div className="flex gap-3 mt-4">
+              <a href="https://www.linkedin.com/company/rwahub" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-secondary text-muted-foreground hover:text-primary transition-colors">
+                <Linkedin size={18} />
+              </a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-secondary text-muted-foreground hover:text-primary transition-colors">
+                <Twitter size={18} />
+              </a>
             </div>
           </div>
 
+          {/* Quick Links */}
           <div>
-            <h4 className="font-display font-semibold text-sm mb-4">Company</h4>
+            <h4 className="font-display font-semibold text-foreground mb-4">Quick Links</h4>
             <div className="space-y-2">
-              {[
-                { label: "About", href: "#about" },
-                { label: "Team", href: "#team" },
-                { label: "Contact", href: "#contact" },
-                { label: "Documentation", href: "https://docs.rwa.io" },
-                { label: "Privacy Policy", href: "#" },
-                { label: "Terms of Service", href: "#" },
-              ].map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target={link.href.startsWith("http") ? "_blank" : undefined}
-                  rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="block text-sm text-muted-foreground hover:text-primary transition-colors"
-                >
-                  {link.label}
-                </a>
-              ))}
+              <Link to="/about" className="block text-sm text-muted-foreground hover:text-primary transition-colors">About</Link>
+              <Link to="/services" className="block text-sm text-muted-foreground hover:text-primary transition-colors">Services</Link>
+              <Link to="/assets" className="block text-sm text-muted-foreground hover:text-primary transition-colors">Assets</Link>
+              <Link to="/technology" className="block text-sm text-muted-foreground hover:text-primary transition-colors">Technology</Link>
             </div>
           </div>
 
+          {/* Company */}
           <div>
-            <h4 className="font-display font-semibold text-sm mb-4">Connect</h4>
-            <div className="flex gap-3">
-              <a
-                href="https://www.linkedin.com/company/rwahub"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-lg bg-secondary flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors"
-              >
-                <Linkedin size={16} />
-              </a>
-              <a
-                href="#"
-                className="w-9 h-9 rounded-lg bg-secondary flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors"
-              >
-                <Twitter size={16} />
-              </a>
+            <h4 className="font-display font-semibold text-foreground mb-4">Company</h4>
+            <div className="space-y-2">
+              <Link to="/team" className="block text-sm text-muted-foreground hover:text-primary transition-colors">Team</Link>
+              <Link to="/hiring" className="block text-sm text-muted-foreground hover:text-primary transition-colors">Hiring</Link>
+              <Link to="/contact" className="block text-sm text-muted-foreground hover:text-primary transition-colors">Contact</Link>
             </div>
           </div>
         </div>
 
-        <div className="border-t border-border pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-muted-foreground text-xs">
+        <div className="mt-12 pt-8 border-t border-border text-center">
+          <p className="text-xs text-muted-foreground">
             © {new Date().getFullYear()} RWA Hub. All rights reserved.
-          </p>
-          <p className="text-muted-foreground text-xs">
-            Miami, Florida • 11–50 Employees
           </p>
         </div>
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}
