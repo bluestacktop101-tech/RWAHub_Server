@@ -114,7 +114,7 @@ function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-display font-semibold text-foreground">Phone</h3>
-                  <p className="text-muted-foreground text-sm mt-1">+1 (305) 555-0123</p>
+                  <p className="text-muted-foreground text-sm mt-1">+1 (908) 409-3770</p>
                 </div>
               </div>
             </motion.div>
