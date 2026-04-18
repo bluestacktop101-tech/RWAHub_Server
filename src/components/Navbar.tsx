@@ -22,22 +22,14 @@ export default function Navbar() {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-glass">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
-          <Link to="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center">
+          <Link to="/" className="flex items-center gap-2.5 shrink-0">
+            <div className="w-9 h-9 rounded-lg bg-gradient-primary flex items-center justify-center shadow-md shadow-primary/20">
               <span className="font-display font-bold text-primary-foreground text-sm">R</span>
             </div>
-            <span className="font-display font-semibold text-lg text-foreground">
+            <span className="font-display font-semibold text-lg text-foreground tracking-tight">
               RWA <span className="text-gradient-primary">Hub</span>
             </span>
           </Link>
-
-          {/* White Paper tag */}
-          <a
-            href="https://www.notion.so/RWAHub-Whitepaper-34203938ce42804faca5cffd0ad749cc"
-            className="hidden lg:inline-flex items-center gap-1.5 ml-3 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold border border-primary/20 hover:bg-primary/20 transition-colors"
-          >
-            📄 White Paper
-          </a>
 
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-1">
@@ -59,10 +51,20 @@ export default function Navbar() {
             })}
           </div>
 
+          <div className="hidden md:flex items-center gap-2">
+            <Link
+              to="/assets"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-gradient-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity shadow-md shadow-primary/20"
+            >
+              Invest Now
+            </Link>
+          </div>
+
           {/* Mobile toggle */}
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="md:hidden p-2 text-foreground"
+            aria-label="Toggle menu"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -96,6 +98,13 @@ export default function Navbar() {
                   </Link>
                 );
               })}
+              <Link
+                to="/assets"
+                onClick={() => setIsOpen(false)}
+                className="mt-3 flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg bg-gradient-primary text-primary-foreground text-sm font-semibold"
+              >
+                Invest Now
+              </Link>
             </div>
           </motion.div>
         )}

@@ -14,17 +14,17 @@ export default function SectionHeader({ tag, title, highlight, description }: Se
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
-      className="text-center mb-16"
+      className="text-center mb-16 md:mb-20"
     >
-      <span className="inline-block px-4 py-1.5 rounded-full bg-secondary text-primary text-xs font-medium tracking-wider uppercase mb-4">
+      <span className="inline-block px-4 py-1.5 rounded-full bg-secondary text-primary text-xs font-medium tracking-wider uppercase mb-5">
         {tag}
       </span>
-      <h1 className="font-display text-3xl md:text-5xl font-bold text-foreground">
+      <h1 className="section-heading text-foreground">
         {title}{" "}
         <span className="text-gradient-primary">{highlight}</span>
       </h1>
       {description && (
-        <p className="mt-4 text-muted-foreground max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
+        <p className="mt-5 text-muted-foreground max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
           {description}
         </p>
       )}

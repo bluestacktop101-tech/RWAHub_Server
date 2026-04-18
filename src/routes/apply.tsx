@@ -13,9 +13,9 @@ export const Route = createFileRoute("/apply")({
   }),
   head: () => ({
     meta: [
-      { title: "RWA Hub" },
+      { title: "Apply — RWA Hub" },
       { name: "description", content: "Submit your application to join the RWAHub team." },
-      { property: "og:title", content: "RWA Hub" },
+      { property: "og:title", content: "Apply — RWA Hub" },
       { property: "og:description", content: "Submit your application to join the RWAHub team." },
     ],
   }),

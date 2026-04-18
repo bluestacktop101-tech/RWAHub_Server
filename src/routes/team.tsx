@@ -32,7 +32,7 @@ export const Route = createFileRoute("/team")({
       { title: "Team — RWA Hub" },
       { name: "description", content: "Meet the founding team driving the future of asset tokenization." },
       { property: "og:title", content: "Our Team — RWA Hub" },
-      { property: "og:description", content: "Experienced leaders in blockchain, finance, and technology." },
+      { property: "og:description", content: "Experienced leaders in finance, technology, and operations." },
     ],
   }),
 });
@@ -44,9 +44,9 @@ function TeamPage() {
         <div className="max-w-6xl mx-auto">
           <SectionHeader
             tag="Leadership"
-            title="Our"
+            title="Meet Our"
             highlight="Founding Team"
-            description="Experienced leaders in blockchain, finance, and technology driving the future of asset tokenization."
+            description="Experienced leaders in finance, technology, and operations — building a trusted way to invest in real-world assets."
           />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

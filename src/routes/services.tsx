@@ -5,11 +5,11 @@ import PageLayout from "@/components/PageLayout";
 import SectionHeader from "@/components/SectionHeader";
 
 const pillars = [
-  { icon: BarChart3, title: "Insights", description: "Comprehensive analytics and market data to help investors and asset owners make informed decisions across the RWA landscape." },
-  { icon: Brain, title: "Intelligence", description: "AI-powered tools for asset valuation, risk assessment, and market trend analysis — turning complex data into actionable intelligence." },
-  { icon: Plug, title: "Integrations", description: "Seamless connectivity between blockchain and traditional financial infrastructure through oracles and cross-chain bridges." },
-  { icon: Wallet, title: "Investments", description: "Decentralized trading with assets directly on-chain. Connect your wallet to publish and trade — truly decentralized ownership." },
-  { icon: Server, title: "Infrastructure", description: "Enterprise-grade blockchain infrastructure with smart contract automation, multi-sig security, and scalable architecture." },
+  { icon: BarChart3, title: "Insights", description: "Clear analytics and market data so investors and asset owners can make informed decisions." },
+  { icon: Brain, title: "Intelligence", description: "Tools for asset valuation, risk assessment, and market trends — turning data into clear insights." },
+  { icon: Plug, title: "Integrations", description: "Reliable connections between our platform and traditional financial systems and data providers." },
+  { icon: Wallet, title: "Investments", description: "Browse, buy, and sell fractional shares of real assets directly from your account." },
+  { icon: Server, title: "Infrastructure", description: "Bank-grade infrastructure with strong security controls, automation, and reliable uptime." },
 ];
 
 export const Route = createFileRoute("/services")({
@@ -17,9 +17,9 @@ export const Route = createFileRoute("/services")({
   head: () => ({
     meta: [
       { title: "Services — RWA Hub" },
-      { name: "description", content: "Explore the five integrated pillars of the RWA Hub ecosystem." },
+      { name: "description", content: "Five core services that power investing in real-world assets on RWA Hub." },
       { property: "og:title", content: "Services — RWA Hub" },
-      { property: "og:description", content: "Five integrated pillars addressing every aspect of the RWA lifecycle." },
+      { property: "og:description", content: "Insights, valuation, integrations, investing, and infrastructure — all in one platform." },
     ],
   }),
 });
@@ -30,10 +30,10 @@ function ServicesPage() {
       <section className="section-padding">
         <div className="max-w-6xl mx-auto">
           <SectionHeader
-            tag="Ecosystem"
-            title="Five Integrated"
-            highlight="Pillars"
-            description="The RWA Hub ecosystem is built upon five pillars, each addressing a critical aspect of the RWA lifecycle."
+            tag="What We Offer"
+            title="Five Core"
+            highlight="Services"
+            description="Everything you need to invest in real-world assets — research, transactions, and reliable infrastructure in one place."
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

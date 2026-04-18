@@ -17,7 +17,7 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-muted-foreground text-sm max-w-md">
-              A complete, integrated ecosystem supporting the entire real-world asset lifecycle — from tokenization to trading, with full regulatory compliance.
+              A modern way to invest in real-world assets — real estate, commodities, and funds — starting from $100, with full transparency and investor protection.
             </p>
             <div className="flex gap-3 mt-4">
               <a href="https://www.linkedin.com/company/rwahub" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-secondary text-muted-foreground hover:text-primary transition-colors">

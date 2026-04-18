@@ -10,9 +10,9 @@ export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: "Contact — RWA Hub" },
-      { name: "description", content: "Get in touch with the RWA Hub team to tokenize your assets." },
+      { name: "description", content: "Get in touch with the RWA Hub team — for investor questions, asset listings, or partnerships." },
       { property: "og:title", content: "Contact — RWA Hub" },
-      { property: "og:description", content: "Ready to tokenize your assets? Let's connect." },
+      { property: "og:description", content: "Talk to our team about investing or listing your asset." },
     ],
   }),
 });
@@ -32,9 +32,9 @@ function ContactPage() {
         <div className="max-w-6xl mx-auto">
           <SectionHeader
             tag="Contact"
-            title="Let's"
-            highlight="Connect"
-            description="Ready to tokenize your assets? Get in touch with our team."
+            title="Get in"
+            highlight="Touch"
+            description="Have a question about investing, want to list an asset, or explore a partnership? Send us a message — we usually reply within one business day."
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -71,7 +71,7 @@ function ContactPage() {
                   rows={4}
                   required
                   className="w-full px-4 py-2.5 rounded-lg bg-secondary border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none"
-                  placeholder="Tell us about your project..."
+                  placeholder="How can we help?"
                 />
               </div>
               <button
@@ -105,7 +105,7 @@ function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-display font-semibold text-foreground">Email</h3>
-                  <p className="text-muted-foreground text-sm mt-1">support@rwahubassets.com</p>
+                  <p className="text-muted-foreground text-sm mt-1">info@rwahub.com</p>
                 </div>
               </div>
               <div className="p-6 rounded-xl bg-card border border-border flex items-start gap-4">
@@ -114,7 +114,7 @@ function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-display font-semibold text-foreground">Phone</h3>
-                  <p className="text-muted-foreground text-sm mt-1">+1 (908) 409-3770</p>
+                  <p className="text-muted-foreground text-sm mt-1">+1 (305) 555-0123</p>
                 </div>
               </div>
             </motion.div>

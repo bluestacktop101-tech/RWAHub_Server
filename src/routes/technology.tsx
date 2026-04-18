@@ -5,29 +5,29 @@ import PageLayout from "@/components/PageLayout";
 import SectionHeader from "@/components/SectionHeader";
 
 const steps = [
-  { number: "01", title: "Asset Valuation", description: "Independent appraisal, legal structuring, and KYC/AML verification of all parties involved." },
-  { number: "02", title: "Token Creation", description: "Smart contracts deployed using NFTs for unique assets and ERC standards for fungible assets." },
-  { number: "03", title: "Compliance", description: "Regulatory compliance embedded into smart contract codebase across all operating jurisdictions." },
-  { number: "04", title: "Market Access", description: "Decentralized trading with instant settlement — connect your wallet to trade directly on-chain." },
+  { number: "01", title: "Asset Review", description: "Independent valuation, legal review, and identity checks for every asset and party involved." },
+  { number: "02", title: "Listing Setup", description: "The asset is structured into affordable shares so investors can buy in starting from $100." },
+  { number: "03", title: "Compliance", description: "All listings follow the financial regulations of the markets where they are offered." },
+  { number: "04", title: "Trade & Settle", description: "Investors buy and sell shares directly on the platform, with fast and reliable settlement." },
 ];
 
 const features = [
-  { icon: Lock, title: "Multi-Sig Security", description: "Multi-signature wallets and hardware security modules protecting all platform assets." },
-  { icon: Cpu, title: "Smart Contracts", description: "Audited contracts handling issuance, transfers, and distributions with AI-powered monitoring." },
-  { icon: FileSearch, title: "Full Audit Trail", description: "Every transaction immutably recorded on blockchain — transparent and tamper-proof." },
-  { icon: Zap, title: "Instant Settlement", description: "T+0 settlement eliminating counterparty risk with assets stored in users' personal wallets." },
-  { icon: ShieldCheck, title: "KYC/AML Protocols", description: "Comprehensive identity verification and anti-money laundering compliance built-in." },
-  { icon: Link2, title: "Oracle Integration", description: "Seamless connectivity between blockchain and traditional financial infrastructures." },
+  { icon: Lock, title: "Bank-Grade Security", description: "Multi-layer access controls and hardware-backed key storage protect funds and assets." },
+  { icon: Cpu, title: "Automated Operations", description: "Issuance, transfers, and distributions run on audited systems with continuous monitoring." },
+  { icon: FileSearch, title: "Full Audit Trail", description: "Every transaction is recorded and timestamped, giving investors clear, verifiable history." },
+  { icon: Zap, title: "Fast Settlement", description: "Trades settle quickly so your account always reflects an up-to-date position." },
+  { icon: ShieldCheck, title: "KYC & AML Checks", description: "Identity verification and anti–money-laundering controls are built into every account." },
+  { icon: Link2, title: "Trusted Data Sources", description: "Pricing and asset data come from established providers, not anonymous feeds." },
 ];
 
 export const Route = createFileRoute("/technology")({
   component: TechnologyPage,
   head: () => ({
     meta: [
-      { title: "Technology — RWA Hub" },
-      { name: "description", content: "Explore the tokenization process and security features powering RWA Hub." },
-      { property: "og:title", content: "Technology — RWA Hub" },
-      { property: "og:description", content: "Enterprise-grade blockchain infrastructure for real-world assets." },
+      { title: "How It Works — RWA Hub" },
+      { name: "description", content: "See how RWA Hub takes a real-world asset from valuation to investor access — securely and transparently." },
+      { property: "og:title", content: "How It Works — RWA Hub" },
+      { property: "og:description", content: "Bank-grade infrastructure powering investing in real-world assets." },
     ],
   }),
 });
@@ -38,10 +38,10 @@ function TechnologyPage() {
       <section className="section-padding">
         <div className="max-w-6xl mx-auto">
           <SectionHeader
-            tag="Technology"
-            title="Tokenization"
-            highlight="Process"
-            description="A standardized, secure process from asset valuation to market access."
+            tag="How It Works"
+            title="From Real Asset to"
+            highlight="Your Portfolio"
+            description="A clear, regulated process that turns a real asset into an affordable investment you can hold in your account."
           />
 
           {/* Steps */}
@@ -67,9 +67,9 @@ function TechnologyPage() {
 
           {/* Security Features */}
           <SectionHeader
-            tag="Security"
-            title="Enterprise-Grade"
-            highlight="Infrastructure"
+            tag="Security & Trust"
+            title="Built on a Secure"
+            highlight="Foundation"
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
