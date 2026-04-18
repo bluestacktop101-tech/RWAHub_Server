@@ -30,6 +30,111 @@ function safeStorageSegment(name: string): string {
   return name.replace(/[^\w.\-()+ ]/g, "_").slice(0, 180);
 }
 
+function buildLegacyDescription(formData: {
+  blockchainAnswer: string;
+  workLocation: string;
+  phone: string;
+  linkedin: string;
+  github: string;
+  resumePath: string;
+  coverLetterPath: string | null;
+}): string {
+  const lines = [
+    formData.blockchainAnswer.trim(),
+    "",
+    `Anticipated work location: ${formData.workLocation.trim()}`,
+    formData.phone.trim() ? `Phone: ${formData.phone.trim()}` : null,
+    formData.linkedin.trim() ? `LinkedIn: ${formData.linkedin.trim()}` : null,
+    formData.github.trim() ? `GitHub: ${formData.github.trim()}` : null,
+    formData.coverLetterPath ? `Cover letter (storage path): ${formData.coverLetterPath}` : null,
+    `Resume (storage path): ${formData.resumePath}`,
+  ].filter(Boolean) as string[];
+  return lines.join("\n");
+}
+
+/** Primary row shape (needs migration). Falls back to legacy columns if DB is older. */
+async function insertJobApplication(params: {
+  position: string;
+  formData: {
+    fullName: string;
+    email: string;
+    phone: string;
+    linkedin: string;
+    github: string;
+    blockchainAnswer: string;
+    workLocation: string;
+  };
+  resumePath: string;
+  coverLetterPath: string | null;
+}) {
+  const { position, formData, resumePath, coverLetterPath } = params;
+
+  const fullRow = {
+    position: position || "General",
+    full_name: formData.fullName.trim(),
+    email: formData.email.trim(),
+    github: formData.github.trim() || null,
+    portfolio: null as string | null,
+    description: null as string | null,
+    phone: formData.phone.trim() || null,
+    linkedin: formData.linkedin.trim() || null,
+    resume_storage_path: resumePath,
+    cover_letter_storage_path: coverLetterPath,
+    blockchain_project_answer: formData.blockchainAnswer.trim(),
+    work_location: formData.workLocation.trim(),
+  };
+
+  const { error: fullError } = await supabase.from("job_applications").insert(fullRow);
+
+  if (!fullError) return { ok: true as const, error: null };
+
+  const hint = `${fullError.message ?? ""} ${(fullError as { details?: string }).details ?? ""}`.toLowerCase();
+  const isRlsDeny =
+    hint.includes("row-level security") ||
+    hint.includes("permission denied") ||
+    fullError.code === "42501";
+
+  if (isRlsDeny) return { ok: false as const, error: fullError };
+
+  const looksLikeLegacyDb =
+    hint.includes("column") ||
+    hint.includes("does not exist") ||
+    hint.includes("schema cache") ||
+    hint.includes("violates not-null") ||
+    hint.includes("not null constraint") ||
+    fullError.code === "PGRST204" ||
+    fullError.code === "42703" ||
+    fullError.code === "23502";
+
+  if (!looksLikeLegacyDb) {
+    return { ok: false as const, error: fullError };
+  }
+
+  const description = buildLegacyDescription({
+    blockchainAnswer: formData.blockchainAnswer,
+    workLocation: formData.workLocation,
+    phone: formData.phone,
+    linkedin: formData.linkedin,
+    github: formData.github,
+    resumePath,
+    coverLetterPath,
+  });
+
+  const legacyRow = {
+    position: position || "General",
+    full_name: formData.fullName.trim(),
+    email: formData.email.trim(),
+    github: formData.github.trim() || null,
+    portfolio: `${STORAGE_BUCKET}/${resumePath}`,
+    description,
+  };
+
+  const { error: legacyError } = await supabase.from("job_applications").insert(legacyRow);
+
+  if (!legacyError) return { ok: true as const, error: null };
+  return { ok: false as const, error: legacyError };
+}
+
 function ApplyPage() {
   const { position } = Route.useSearch();
   const [submitted, setSubmitted] = useState(false);
@@ -100,27 +205,22 @@ function ApplyPage() {
       }
     }
 
-    const { error: insertError } = await supabase.from("job_applications").insert({
-      position: position || "General",
-      full_name: formData.fullName,
-      email: formData.email,
-      github: formData.github.trim() || null,
-      portfolio: null,
-      description: null,
-      phone: formData.phone.trim() || null,
-      linkedin: formData.linkedin.trim() || null,
-      resume_storage_path: resumePath,
-      cover_letter_storage_path: coverLetterPath,
-      blockchain_project_answer: formData.blockchainAnswer.trim(),
-      work_location: formData.workLocation.trim(),
+    const { ok, error: insertError } = await insertJobApplication({
+      position,
+      formData,
+      resumePath,
+      coverLetterPath,
     });
 
     setSubmitting(false);
 
-    if (insertError) {
+    if (!ok && insertError) {
       const toRemove = [resumePath, ...(coverLetterPath ? [coverLetterPath] : [])];
       await supabase.storage.from(STORAGE_BUCKET).remove(toRemove);
-      setError("Failed to submit application. Please try again.");
+      const detail = [insertError.message, (insertError as { details?: string }).details]
+        .filter(Boolean)
+        .join(" ");
+      setError(detail ? `Could not save application: ${detail}` : "Failed to submit application. Please try again.");
       console.error(insertError);
       return;
     }
@@ -274,9 +374,10 @@ function ApplyPage() {
                 </label>
                 <input
                   id="linkedin"
-                  type="url"
+                  type="text"
                   name="linkedin"
                   autoComplete="url"
+                  inputMode="url"
                   value={formData.linkedin}
                   onChange={handleChange}
                   className={inputClass}
@@ -290,9 +391,10 @@ function ApplyPage() {
                 </label>
                 <input
                   id="github"
-                  type="url"
+                  type="text"
                   name="github"
                   autoComplete="url"
+                  inputMode="url"
                   value={formData.github}
                   onChange={handleChange}
                   className={inputClass}

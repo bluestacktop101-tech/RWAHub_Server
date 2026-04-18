@@ -1,1 +1,2 @@
-project_id = "qhsdummkuvmjslwuhiuw"
+# Dashboard / API project ref (matches *.supabase.co subdomain). Required for `supabase link` + `db push`.
+project_id = "omdcyfewrmcqflfxopqz"
