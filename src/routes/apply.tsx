@@ -1,9 +1,9 @@
-import { createFileRoute, useSearch, Link } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, ArrowLeft, Upload, Github, Mail, FileText, User } from "lucide-react";
+import { Send, ArrowLeft } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
-import SectionHeader from "@/components/SectionHeader";
+import { FileDropzone } from "@/components/FileDropzone";
 import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/apply")({
@@ -21,18 +21,35 @@ export const Route = createFileRoute("/apply")({
   }),
 });
 
+const STORAGE_BUCKET = "job-application-files";
+
+const inputClass =
+  "w-full rounded-md border border-neutral-300 bg-white px-3 py-2.5 text-sm text-neutral-900 shadow-sm placeholder:text-neutral-400 focus:border-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-900/10";
+
+function safeStorageSegment(name: string): string {
+  return name.replace(/[^\w.\-()+ ]/g, "_").slice(0, 180);
+}
+
 function ApplyPage() {
   const { position } = Route.useSearch();
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const [resumeFile, setResumeFile] = useState<File | null>(null);
+  const [coverLetterFile, setCoverLetterFile] = useState<File | null>(null);
+
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
+    phone: "",
+    linkedin: "",
     github: "",
-    portfolio: "",
-    description: "",
+    blockchainAnswer: "",
+    workLocation: "",
   });
+
+  const roleTitle = position.trim() ? position.trim() : "General application";
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -40,23 +57,69 @@ function ApplyPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitting(true);
     setError(null);
 
-    const { error: insertError } = await supabase
-      .from("job_applications")
-      .insert({
-        position: position || "General",
-        full_name: formData.fullName,
-        email: formData.email,
-        github: formData.github || null,
-        portfolio: formData.portfolio,
-        description: formData.description,
+    if (!resumeFile) {
+      setError("Please upload your resume.");
+      return;
+    }
+
+    setSubmitting(true);
+
+    const folder = crypto.randomUUID();
+
+    const resumePath = `${folder}/resume-${safeStorageSegment(resumeFile.name)}`;
+    const { error: resumeUploadError } = await supabase.storage
+      .from(STORAGE_BUCKET)
+      .upload(resumePath, resumeFile, {
+        contentType: resumeFile.type || undefined,
+        upsert: false,
       });
+
+    if (resumeUploadError) {
+      setSubmitting(false);
+      setError("Could not upload resume. Check your connection or try again.");
+      console.error(resumeUploadError);
+      return;
+    }
+
+    let coverLetterPath: string | null = null;
+    if (coverLetterFile) {
+      coverLetterPath = `${folder}/cover-${safeStorageSegment(coverLetterFile.name)}`;
+      const { error: coverErr } = await supabase.storage
+        .from(STORAGE_BUCKET)
+        .upload(coverLetterPath, coverLetterFile, {
+          contentType: coverLetterFile.type || undefined,
+          upsert: false,
+        });
+      if (coverErr) {
+        setSubmitting(false);
+        setError("Resume was uploaded but cover letter upload failed. Please try again.");
+        console.error(coverErr);
+        return;
+      }
+    }
+
+    const { error: insertError } = await supabase.from("job_applications").insert({
+      position: position || "General",
+      full_name: formData.fullName,
+      email: formData.email,
+      github: formData.github.trim() || null,
+      portfolio: null,
+      description: null,
+      phone: formData.phone.trim() || null,
+      linkedin: formData.linkedin.trim() || null,
+      resume_storage_path: resumePath,
+      cover_letter_storage_path: coverLetterPath,
+      blockchain_project_answer: formData.blockchainAnswer.trim(),
+      work_location: formData.workLocation.trim(),
+    });
 
     setSubmitting(false);
 
     if (insertError) {
+      const toRemove = [resumePath, ...(coverLetterPath ? [coverLetterPath] : [])];
+      await supabase.storage.from(STORAGE_BUCKET).remove(toRemove);
       setError("Failed to submit application. Please try again.");
       console.error(insertError);
       return;
@@ -68,30 +131,30 @@ function ApplyPage() {
   if (submitted) {
     return (
       <PageLayout>
-        <section className="py-20">
-          <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <section className="bg-[#f6f7f9] min-h-[calc(100vh-5rem)] py-12 md:py-16">
+          <div className="max-w-[560px] mx-auto px-4 sm:px-6">
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
-              className="p-12 rounded-xl bg-card border border-border"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.35 }}
+              className="rounded-xl border border-neutral-200 bg-white p-10 md:p-12 text-center shadow-sm"
             >
-              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6">
-                <Send size={28} className="text-primary" />
+              <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-emerald-50 ring-1 ring-emerald-100">
+                <Send size={26} className="text-emerald-600" />
               </div>
-              <h2 className="text-2xl font-display font-bold text-foreground mb-3">
-                Application Submitted!
-              </h2>
-              <p className="text-muted-foreground mb-6">
-                Thank you for your interest in joining RWAHub
-                {position ? ` as a ${position}` : ""}. We'll review your
-                application and get back to you soon.
+              <h1 className="font-display text-xl font-semibold tracking-tight text-neutral-900 md:text-2xl">
+                Application submitted
+              </h1>
+              <p className="mt-3 text-sm leading-relaxed text-neutral-600">
+                Thank you for applying
+                {position ? ` for ${position}` : ""}. We&apos;ll review your submission and follow up by email.
               </p>
               <Link
                 to="/hiring"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-gradient-primary text-primary-foreground font-medium text-sm hover:opacity-90 transition-opacity"
+                className="mt-8 inline-flex items-center justify-center gap-2 rounded-md bg-neutral-900 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-neutral-800"
               >
-                <ArrowLeft size={14} /> Back to Open Positions
+                <ArrowLeft size={16} aria-hidden />
+                Back to open positions
               </Link>
             </motion.div>
           </div>
@@ -102,140 +165,197 @@ function ApplyPage() {
 
   return (
     <PageLayout>
-      <section className="py-20">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="bg-[#f6f7f9] min-h-[calc(100vh-5rem)] py-10 md:py-14">
+        <div className="max-w-[560px] mx-auto px-4 sm:px-6">
           <Link
             to="/hiring"
-            className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8"
+            className="inline-flex items-center gap-1.5 text-sm text-neutral-600 transition-colors hover:text-neutral-900"
           >
-            <ArrowLeft size={14} /> Back to Open Positions
+            <ArrowLeft size={16} aria-hidden />
+            Back to open positions
           </Link>
 
-          <SectionHeader
-            tag="Apply"
-            title="Join"
-            highlight={position || "RWAHub"}
-            description={
-              position
-                ? `You're applying for the ${position} position. Fill in the details below.`
-                : "Submit your application to join our team."
-            }
-          />
-
-          <motion.form
-            onSubmit={handleSubmit}
-            initial={{ opacity: 0, y: 20 }}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="p-8 rounded-xl bg-card border border-border space-y-6"
+            transition={{ duration: 0.35 }}
+            className="mt-8 rounded-xl border border-neutral-200 bg-white shadow-sm"
           >
-            {position && (
-              <div className="px-4 py-3 rounded-lg bg-primary/5 border border-primary/10">
-                <p className="text-sm text-primary font-medium">
-                  Position: {position}
-                </p>
+            <div className="border-b border-neutral-100 px-6 py-8 md:px-10 md:py-9">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gradient-primary shadow-sm shadow-primary/20">
+                  <span className="font-display text-sm font-bold text-primary-foreground">R</span>
+                </div>
+                <span className="font-display text-base font-semibold tracking-tight text-neutral-900">
+                  RWA <span className="text-gradient-primary">Hub</span>
+                </span>
               </div>
-            )}
-
-            {/* Full Name */}
-            <div>
-              <label className="flex items-center gap-2 text-sm font-medium text-foreground mb-2">
-                <User size={14} className="text-muted-foreground" />
-                Full Name <span className="text-destructive">*</span>
-              </label>
-              <input
-                type="text"
-                name="fullName"
-                required
-                value={formData.fullName}
-                onChange={handleChange}
-                className="w-full px-4 py-2.5 rounded-lg bg-secondary border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
-                placeholder="Your full name"
-              />
-            </div>
-
-            {/* Email */}
-            <div>
-              <label className="flex items-center gap-2 text-sm font-medium text-foreground mb-2">
-                <Mail size={14} className="text-muted-foreground" />
-                Email Address <span className="text-destructive">*</span>
-              </label>
-              <input
-                type="email"
-                name="email"
-                required
-                value={formData.email}
-                onChange={handleChange}
-                className="w-full px-4 py-2.5 rounded-lg bg-secondary border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
-                placeholder="you@example.com"
-              />
-            </div>
-
-            {/* GitHub */}
-            <div>
-              <label className="flex items-center gap-2 text-sm font-medium text-foreground mb-2">
-                <Github size={14} className="text-muted-foreground" />
-                GitHub Profile
-              </label>
-              <input
-                type="url"
-                name="github"
-                value={formData.github}
-                onChange={handleChange}
-                className="w-full px-4 py-2.5 rounded-lg bg-secondary border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
-                placeholder="https://github.com/yourusername"
-              />
-            </div>
-
-            {/* Resume / Portfolio */}
-            <div>
-              <label className="flex items-center gap-2 text-sm font-medium text-foreground mb-2">
-                <Upload size={14} className="text-muted-foreground" />
-                Resume or Portfolio Link <span className="text-destructive">*</span>
-              </label>
-              <input
-                type="url"
-                name="portfolio"
-                required
-                value={formData.portfolio}
-                onChange={handleChange}
-                className="w-full px-4 py-2.5 rounded-lg bg-secondary border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
-                placeholder="Link to your resume, portfolio, or LinkedIn"
-              />
-              <p className="text-xs text-muted-foreground mt-1.5">
-                Google Drive, Dropbox, LinkedIn, or personal website
+              <h1 className="mt-6 font-display text-2xl font-semibold leading-tight tracking-tight text-neutral-900 md:text-[1.65rem]">
+                {roleTitle}{" "}
+                <span className="font-normal text-neutral-500">@ RWA Hub</span>
+              </h1>
+              <p className="mt-3 text-sm text-neutral-600">
+                Complete the form to submit your application. Fields marked with{" "}
+                <span className="text-red-500">*</span> are required.
               </p>
             </div>
 
-            {/* Description */}
-            <div>
-              <label className="flex items-center gap-2 text-sm font-medium text-foreground mb-2">
-                <FileText size={14} className="text-muted-foreground" />
-                Tell us about yourself <span className="text-destructive">*</span>
-              </label>
-              <textarea
-                name="description"
+            <form onSubmit={handleSubmit} className="space-y-5 px-6 py-8 md:px-10 md:py-9">
+              <div>
+                <label htmlFor="fullName" className="mb-1.5 block text-sm font-medium text-neutral-900">
+                  Name <span className="text-red-500">*</span>
+                </label>
+                <input
+                  id="fullName"
+                  type="text"
+                  name="fullName"
+                  required
+                  autoComplete="name"
+                  value={formData.fullName}
+                  onChange={handleChange}
+                  className={inputClass}
+                  placeholder="Jane Doe"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-neutral-900">
+                  Email <span className="text-red-500">*</span>
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  name="email"
+                  required
+                  autoComplete="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className={inputClass}
+                  placeholder="you@example.com"
+                />
+              </div>
+
+              <FileDropzone
+                label="Resume"
                 required
-                rows={5}
-                value={formData.description}
-                onChange={handleChange}
-                className="w-full px-4 py-2.5 rounded-lg bg-secondary border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none"
-                placeholder="Share your experience, what excites you about RWAHub, and why you'd be a great fit..."
+                accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                file={resumeFile}
+                onFileChange={setResumeFile}
+                placeholder="Upload file or drag and drop here"
               />
-            </div>
 
-            {error && (
-              <p className="text-sm text-destructive text-center">{error}</p>
-            )}
+              <div>
+                <label htmlFor="phone" className="mb-1.5 block text-sm font-medium text-neutral-900">
+                  Phone
+                </label>
+                <input
+                  id="phone"
+                  type="tel"
+                  name="phone"
+                  autoComplete="tel"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  className={inputClass}
+                  placeholder="+1 (555) 000-0000"
+                />
+              </div>
 
-            <button
-              type="submit"
-              disabled={submitting}
-              className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-gradient-primary text-primary-foreground font-medium text-sm hover:opacity-90 transition-opacity disabled:opacity-50"
-            >
-              {submitting ? "Submitting..." : <><Send size={16} /> Submit Application</>}
-            </button>
-          </motion.form>
+              <FileDropzone
+                label="Cover Letter"
+                accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                file={coverLetterFile}
+                onFileChange={setCoverLetterFile}
+                placeholder="Upload file or drag and drop here"
+              />
+
+              <div>
+                <label htmlFor="linkedin" className="mb-1.5 block text-sm font-medium text-neutral-900">
+                  LinkedIn Profile
+                </label>
+                <input
+                  id="linkedin"
+                  type="url"
+                  name="linkedin"
+                  autoComplete="url"
+                  value={formData.linkedin}
+                  onChange={handleChange}
+                  className={inputClass}
+                  placeholder="https://linkedin.com/in/yourprofile"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="github" className="mb-1.5 block text-sm font-medium text-neutral-900">
+                  Github URL
+                </label>
+                <input
+                  id="github"
+                  type="url"
+                  name="github"
+                  autoComplete="url"
+                  value={formData.github}
+                  onChange={handleChange}
+                  className={inputClass}
+                  placeholder="https://github.com/username"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="blockchainAnswer" className="mb-1.5 block text-sm font-medium text-neutral-900">
+                  What blockchain project are you most excited about, and how do you interact with it?{" "}
+                  <span className="text-red-500">*</span>
+                </label>
+                <textarea
+                  id="blockchainAnswer"
+                  name="blockchainAnswer"
+                  required
+                  rows={6}
+                  value={formData.blockchainAnswer}
+                  onChange={handleChange}
+                  className={`${inputClass} resize-y min-h-[140px]`}
+                  placeholder="Tell us about the project and how you use it (trading, building, governance, etc.)."
+                />
+              </div>
+
+              <div>
+                <label htmlFor="workLocation" className="mb-1.5 block text-sm font-medium text-neutral-900">
+                  Anticipated Work Location (City, State) <span className="text-red-500">*</span>
+                </label>
+                <input
+                  id="workLocation"
+                  type="text"
+                  name="workLocation"
+                  required
+                  autoComplete="address-level2"
+                  value={formData.workLocation}
+                  onChange={handleChange}
+                  className={inputClass}
+                  placeholder="e.g. Austin, TX"
+                />
+              </div>
+
+              {error ? (
+                <p className="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">{error}</p>
+              ) : null}
+
+              <div className="pt-2">
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  className="flex w-full items-center justify-center gap-2 rounded-md bg-neutral-900 px-4 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-neutral-800 disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  {submitting ? (
+                    "Submitting…"
+                  ) : (
+                    <>
+                      <Send size={16} aria-hidden />
+                      Submit application
+                    </>
+                  )}
+                </button>
+              </div>
+            </form>
+          </motion.div>
         </div>
       </section>
     </PageLayout>

@@ -16,34 +16,52 @@ export type Database = {
     Tables: {
       job_applications: {
         Row: {
+          blockchain_project_answer: string | null
+          cover_letter_storage_path: string | null
           created_at: string
-          description: string
+          description: string | null
           email: string
           full_name: string
           github: string | null
           id: string
-          portfolio: string
+          linkedin: string | null
+          phone: string | null
+          portfolio: string | null
           position: string
+          resume_storage_path: string | null
+          work_location: string | null
         }
         Insert: {
+          blockchain_project_answer?: string | null
+          cover_letter_storage_path?: string | null
           created_at?: string
-          description: string
+          description?: string | null
           email: string
           full_name: string
           github?: string | null
           id?: string
-          portfolio: string
+          linkedin?: string | null
+          phone?: string | null
+          portfolio?: string | null
           position: string
+          resume_storage_path?: string | null
+          work_location?: string | null
         }
         Update: {
+          blockchain_project_answer?: string | null
+          cover_letter_storage_path?: string | null
           created_at?: string
-          description?: string
+          description?: string | null
           email?: string
           full_name?: string
           github?: string | null
           id?: string
-          portfolio?: string
+          linkedin?: string | null
+          phone?: string | null
+          portfolio?: string | null
           position?: string
+          resume_storage_path?: string | null
+          work_location?: string | null
         }
         Relationships: []
       }
