@@ -155,11 +155,11 @@ const jobs: JobPosition[] = [
     howToApply: ["GitHub / portfolio", "Examples of systems or products you've led or built", "Short note on your experience with architecture, scaling systems, or Web3"],
   },
   {
-    title: "Full Stack Blockchain Developer",
+    title: "Full Stack Blockchain Engineer",
     category: "Engineering",
     location: "Fully Remote / Global",
     type: "Full-Time / Part-Time",
-    notionUrl: "https://www.notion.so/Full-Stack-Blockchain-Developer-34203938ce42804ca50af610ba007421",
+    notionUrl: "https://www.notion.so/Full-Stack-Blockchain-Engineer-34203938ce42804ca50af610ba007421",
     description: "You'll work across the stack — from frontend interfaces to backend services and blockchain integrations.",
     responsibilities: [
       "Building and improving frontend features in React / Next.js",
@@ -193,11 +193,11 @@ const jobs: JobPosition[] = [
     howToApply: ["GitHub / portfolio", "Projects you've built (frontend, backend, or Web3)", "Short note on your experience with React + Node + Web3"],
   },
   {
-    title: "Blockchain Engineer",
+    title: "Smart Contract Engineer",
     category: "Engineering",
     location: "Fully Remote / Global",
     type: "Full-Time / Part-Time",
-    notionUrl: "https://www.notion.so/Blockchain-Engineer-34203938ce428006b109eb3110481ddd",
+    notionUrl: "https://www.notion.so/Smart-Contract-Engineer-34203938ce428006b109eb3110481ddd",
     description: "You'll be working on the core smart contract layer of the platform.",
     responsibilities: [
       "Designing and building tokenization logic for real-world assets",
@@ -233,11 +233,11 @@ const jobs: JobPosition[] = [
     howToApply: ["GitHub / portfolio", "Relevant smart contract work", "Short note on your experience in DeFi or token-based systems"],
   },
   {
-    title: "Frontend Developer",
+    title: "Frontend Engineer",
     category: "Engineering",
     location: "Remote (Global)",
     type: "Full-time / Part-time",
-    notionUrl: "https://www.notion.so/Frontend-Developer-34203938ce42800d8e69cabc5ac65ee5",
+    notionUrl: "https://www.notion.so/Frontend-Engineer-34203938ce42800d8e69cabc5ac65ee5",
     description: "You'll be responsible for building and improving the user-facing side of the platform.",
     responsibilities: [
       "Building responsive UI features in React / Next.js",
@@ -270,11 +270,11 @@ const jobs: JobPosition[] = [
     howToApply: ["GitHub / portfolio", "Relevant frontend projects", "Short note on your experience with React and any Web3 integrations"],
   },
   {
-    title: "Backend Developer",
+    title: "Backend Engineer",
     category: "Engineering",
     location: "Remote (Global)",
     type: "Full-time / Part-time",
-    notionUrl: "https://www.notion.so/Backend-Developer-34203938ce42808f9510d838b781a119",
+    notionUrl: "https://www.notion.so/Backend-Engineer-34203938ce42808f9510d838b781a119",
     description: "You'll be responsible for building and scaling the backend systems that power the platform.",
     responsibilities: [
       "Building and maintaining backend APIs and services",
@@ -311,7 +311,7 @@ const jobs: JobPosition[] = [
     category: "Engineering",
     location: "Remote (Global)",
     type: "Full-time / Part-time",
-    notionUrl: "https://www.notion.so/Backend-Developer-34203938ce42808f9510d838b781a119",
+    notionUrl: "https://www.notion.so/DevOps-Engineer-34203938ce428063b869d32f9b71a489",
     description: "You'll be responsible for infrastructure, CI/CD, and ensuring reliable deployments across the platform.",
     responsibilities: [
       "Setting up and maintaining CI/CD pipelines",
