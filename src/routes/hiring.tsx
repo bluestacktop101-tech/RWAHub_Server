@@ -285,7 +285,7 @@ const jobs: JobPosition[] = [
       "Designing data models for real-world asset tokenization flows",
     ],
     requirements: [
-      "Strong backend development experience in Node.js, Rust, Go, or Python",
+      "Strong backend development experience in Node.js",
       "Experience building production-grade APIs and services",
       "Understanding of databases (SQL and/or NoSQL)",
       "Experience working with distributed systems or scalable architectures",
