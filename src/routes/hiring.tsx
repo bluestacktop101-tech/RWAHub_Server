@@ -8,10 +8,10 @@ import { Briefcase, MapPin, Clock, ChevronDown, ChevronUp, ExternalLink } from "
 export const Route = createFileRoute("/hiring")({
   head: () => ({
     meta: [
-      { title: "We're Hiring — RWA Hub" },
-      { name: "description", content: "Join RWAHub and help build the future of real-world asset tokenization. Explore open positions in engineering, design, product, and more." },
-      { property: "og:title", content: "We're Hiring — RWA Hub" },
-      { property: "og:description", content: "Join RWAHub and help build the future of real-world asset tokenization." },
+      { title: "Careers — RWA Hub" },
+      { name: "description", content: "Explore open roles across engineering, design, product, and operations at RWA Hub." },
+      { property: "og:title", content: "Careers — RWA Hub" },
+      { property: "og:description", content: "Open roles supporting the development and operation of RWA Hub." },
     ],
   }),
   component: HiringPage,
@@ -768,10 +768,10 @@ function HiringPage() {
       <section className="py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
-            tag="We're Hiring"
-            title="Join the Team Building the"
-            highlight="Future of RWA"
-            description="RWAHub is building a decentralized marketplace for real-world assets. We're looking for talented people to join us early and shape the next generation of asset ownership."
+            tag="Careers"
+            title="Join the Team Supporting"
+            highlight="RWA Hub Operations"
+            description="RWA Hub is building platform infrastructure for tokenized real-world assets. We are hiring across engineering, design, product, and operations."
           />
 
           <div className="flex flex-wrap justify-center gap-2 mb-10">
@@ -803,10 +803,10 @@ function HiringPage() {
 
           <div className="mt-16 text-center p-8 rounded-xl bg-card border border-border">
             <h3 className="text-xl font-display font-semibold text-foreground mb-2">
-              Don't see your role?
+              Don't see a matching role?
             </h3>
             <p className="text-muted-foreground text-sm mb-4">
-              We're always looking for talented people. Send your CV and a short intro to us.
+              We review relevant profiles on an ongoing basis. Send your CV and a short introduction.
             </p>
             <a
               href="https://www.linkedin.com/company/rwahub"

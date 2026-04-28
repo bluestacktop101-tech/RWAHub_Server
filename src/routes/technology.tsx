@@ -6,16 +6,16 @@ import SectionHeader from "@/components/SectionHeader";
 
 const steps = [
   { number: "01", title: "Asset Review", description: "Independent valuation, legal review, and identity checks for every asset and party involved." },
-  { number: "02", title: "Listing Setup", description: "The asset is structured into affordable shares so investors can buy in starting from $100." },
+  { number: "02", title: "Listing Setup", description: "The asset is structured into a defined token format with documented ownership and governance terms." },
   { number: "03", title: "Compliance", description: "All listings follow the financial regulations of the markets where they are offered." },
-  { number: "04", title: "Trade & Settle", description: "Investors buy and sell shares directly on the platform, with fast and reliable settlement." },
+  { number: "04", title: "Transfer & Settlement", description: "Transfers and settlement are processed through controlled workflows with auditable records." },
 ];
 
 const features = [
   { icon: Lock, title: "Bank-Grade Security", description: "Multi-layer access controls and hardware-backed key storage protect funds and assets." },
   { icon: Cpu, title: "Automated Operations", description: "Issuance, transfers, and distributions run on audited systems with continuous monitoring." },
-  { icon: FileSearch, title: "Full Audit Trail", description: "Every transaction is recorded and timestamped, giving investors clear, verifiable history." },
-  { icon: Zap, title: "Fast Settlement", description: "Trades settle quickly so your account always reflects an up-to-date position." },
+  { icon: FileSearch, title: "Full Audit Trail", description: "Every transaction is recorded and timestamped to support verifiable reporting and oversight." },
+  { icon: Zap, title: "Settlement Reliability", description: "Settlement workflows are monitored to maintain accurate and current position records." },
   { icon: ShieldCheck, title: "KYC & AML Checks", description: "Identity verification and anti–money-laundering controls are built into every account." },
   { icon: Link2, title: "Trusted Data Sources", description: "Pricing and asset data come from established providers, not anonymous feeds." },
 ];
@@ -25,9 +25,9 @@ export const Route = createFileRoute("/technology")({
   head: () => ({
     meta: [
       { title: "How It Works — RWA Hub" },
-      { name: "description", content: "See how RWA Hub takes a real-world asset from valuation to investor access — securely and transparently." },
+      { name: "description", content: "See how RWA Hub takes a real-world asset from valuation to compliant onboarding, issuance, and administration." },
       { property: "og:title", content: "How It Works — RWA Hub" },
-      { property: "og:description", content: "Bank-grade infrastructure powering investing in real-world assets." },
+      { property: "og:description", content: "Institutional-grade infrastructure for tokenized real-world asset operations." },
     ],
   }),
 });
@@ -39,9 +39,9 @@ function TechnologyPage() {
         <div className="max-w-6xl mx-auto">
           <SectionHeader
             tag="How It Works"
-            title="From Real Asset to"
-            highlight="Your Portfolio"
-            description="A clear, regulated process that turns a real asset into an affordable investment you can hold in your account."
+            title="From Asset Review to"
+            highlight="Operational Administration"
+            description="A controlled process that supports compliant onboarding, structured issuance, and transparent lifecycle management."
           />
 
           {/* Steps */}

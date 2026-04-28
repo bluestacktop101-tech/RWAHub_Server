@@ -31,16 +31,16 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "RWA Hub — Real-World Asset Tokenization" },
-      { name: "description", content: "A complete ecosystem for real-world asset tokenization." },
+      { title: "RWA Hub — Institutional Real-World Asset Platform" },
+      { name: "description", content: "A compliance-led platform for real-world asset onboarding, issuance, and administration." },
       { name: "author", content: "RWA Hub" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
-      { property: "og:title", content: "RWA Hub — Real-World Asset Tokenization" },
-      { name: "twitter:title", content: "RWA Hub — Real-World Asset Tokenization" },
-      { property: "og:description", content: "A complete ecosystem for real-world asset tokenization." },
-      { name: "twitter:description", content: "A complete ecosystem for real-world asset tokenization." },
+      { property: "og:title", content: "RWA Hub — Institutional Real-World Asset Platform" },
+      { name: "twitter:title", content: "RWA Hub — Institutional Real-World Asset Platform" },
+      { property: "og:description", content: "A compliance-led platform for real-world asset onboarding, issuance, and administration." },
+      { name: "twitter:description", content: "A compliance-led platform for real-world asset onboarding, issuance, and administration." },
     ],
     links: [
       {

@@ -8,17 +8,17 @@ const values = [
   {
     icon: Target,
     title: "Our Mission",
-    description: "Make investing in real assets — like real estate, commodities, and private funds — simple, affordable, and accessible to anyone.",
+    description: "Provide a compliance-led infrastructure for onboarding, issuing, and administering tokenized real-world assets.",
   },
   {
     icon: Eye,
     title: "Our Vision",
-    description: "A financial system where anyone can own a share of the assets they believe in, with clear pricing, full transparency, and strong investor protection.",
+    description: "Advance market infrastructure with stronger transparency, controls, and standardized access to private and real assets.",
   },
   {
     icon: Heart,
     title: "Our Values",
-    description: "Trust, transparency, and accessibility. We hold ourselves to the same standards as a regulated financial institution and put investors first.",
+    description: "Governance, transparency, and operational discipline aligned with institutional financial standards.",
   },
 ];
 
@@ -27,9 +27,9 @@ export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       { title: "About — RWA Hub" },
-      { name: "description", content: "RWA Hub is a financial platform that makes investing in real-world assets simple, transparent, and accessible from $100." },
+      { name: "description", content: "RWA Hub is a compliance-led platform for institutional-grade real-world asset onboarding, issuance, and administration." },
       { property: "og:title", content: "About — RWA Hub" },
-      { property: "og:description", content: "A modern way to invest in real-world assets — built on trust and transparency, headquartered in Miami." },
+      { property: "og:description", content: "Institutional controls, transparent workflows, and compliant access to tokenized real-world assets." },
     ],
   }),
 });
@@ -41,9 +41,9 @@ function AboutPage() {
         <div className="max-w-6xl mx-auto">
           <SectionHeader
             tag="About RWA Hub"
-            title="A New Way to Invest in"
+            title="Institutional Infrastructure for"
             highlight="Real Assets"
-            description="Headquartered in Miami, RWA Hub is a financial platform that makes real-world assets — real estate, commodities, and funds — accessible to everyday investors. We pair the trust of regulated finance with the simplicity of a modern app."
+            description="Headquartered in Miami, RWA Hub operates a compliance-led platform for tokenized real-world assets, including real estate, commodities, and funds. Our focus is governance, transparency, and reliable operational controls."
           />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

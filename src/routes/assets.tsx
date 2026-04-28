@@ -83,9 +83,9 @@ export const Route = createFileRoute("/assets")({
   head: () => ({
     meta: [
       { title: "Assets — RWA Hub" },
-      { name: "description", content: "Browse real-world investment opportunities — real estate, securities, and alternative assets — starting from $100." },
+      { name: "description", content: "Review real-world asset listings across real estate, securities, and alternatives with standardized disclosures." },
       { property: "og:title", content: "Available Assets — RWA Hub" },
-      { property: "og:description", content: "Three categories of real-world assets you can invest in today." },
+      { property: "og:description", content: "Three real-world asset categories presented with structured documentation and transparent listing data." },
     ],
   }),
 });
@@ -96,10 +96,10 @@ function AssetsPage() {
       <section className="section-padding">
         <div className="max-w-6xl mx-auto">
           <SectionHeader
-            tag="Marketplace"
+            tag="Asset Listings"
             title="Available"
             highlight="Asset Classes"
-            description="Three categories of real-world investments — clearly priced, fully documented, and accessible from $100."
+            description="Three categories of tokenized real-world assets presented with pricing references, documentation, and listing status."
           />
 
           <div className="space-y-12">
@@ -152,7 +152,7 @@ function AssetsPage() {
                         </div>
                         <div className="rounded-lg bg-secondary/40 p-3">
                           <p className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
-                            <TrendingUp size={10} /> Expected Yield
+                            <TrendingUp size={10} /> Indicative Metric
                           </p>
                           <p className="text-sm font-semibold text-primary mt-1">{item.yield}</p>
                         </div>
@@ -165,7 +165,7 @@ function AssetsPage() {
                         </div>
                         <Progress value={item.funded} className="h-1.5" />
                         <p className="text-[10px] text-muted-foreground mt-2">
-                          Total value: <span className="text-foreground">{item.totalValue}</span>
+                          Listing value: <span className="text-foreground">{item.totalValue}</span>
                         </p>
                       </div>
 

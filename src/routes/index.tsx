@@ -7,22 +7,22 @@ import PageLayout from "@/components/PageLayout";
 
 const platformStats = [
   { value: "$240M+", label: "Assets under management" },
-  { value: "12,000+", label: "Active investors" },
-  { value: "9.4%", label: "Avg. annual yield" },
-  { value: "60+", label: "Countries supported" },
+  { value: "12,000+", label: "Verified investor accounts" },
+  { value: "60+", label: "Jurisdictions represented" },
+  { value: "24/7", label: "Platform monitoring" },
 ];
 
 const trustBadges = [
-  { icon: Shield, label: "Regulated entity" },
-  { icon: Globe, label: "Available worldwide" },
-  { icon: TrendingUp, label: "Start from $100" },
+  { icon: Shield, label: "Compliance-led framework" },
+  { icon: Globe, label: "Global investor access" },
+  { icon: TrendingUp, label: "Institutional reporting standards" },
 ];
 
 const steps = [
-  { icon: BadgeCheck, title: "Assets are verified", description: "Every asset is reviewed and documented before it's listed." },
-  { icon: Layers, title: "Tokenized into shares", description: "Ownership is split into affordable digital shares." },
-  { icon: Wallet, title: "Users invest", description: "Buy a share online in minutes, starting from $100." },
-  { icon: LineChart, title: "Earn returns and trade", description: "Receive income and trade your shares anytime." },
+  { icon: BadgeCheck, title: "Asset due diligence", description: "Each listing undergoes legal, operational, and documentation review before approval." },
+  { icon: Layers, title: "Structured issuance", description: "Assets are represented through a defined token structure with clear ownership records." },
+  { icon: Wallet, title: "Investor onboarding", description: "Eligible investors complete identity and compliance checks before accessing offerings." },
+  { icon: LineChart, title: "Ongoing administration", description: "Positions, distributions, and disclosures are managed through standardized workflows." },
 ];
 
 const trustItems = [
@@ -36,10 +36,10 @@ export const Route = createFileRoute("/")({
   component: IndexPage,
   head: () => ({
     meta: [
-      { title: "RWA Hub — Invest in Real-World Assets from $100" },
-      { name: "description", content: "RWA Hub lets you invest in real estate, commodities, and other tangible assets online — starting at $100, with full transparency and regulatory protection." },
-      { property: "og:title", content: "RWA Hub — Invest in Real-World Assets from $100" },
-      { property: "og:description", content: "Buy a fraction of real assets online. Simple, secure, and accessible from anywhere." },
+      { title: "RWA Hub — Institutional Real-World Asset Platform" },
+      { name: "description", content: "RWA Hub provides compliant access, structured issuance, and transparent administration for tokenized real-world assets." },
+      { property: "og:title", content: "RWA Hub — Institutional Real-World Asset Platform" },
+      { property: "og:description", content: "A compliance-led platform for real-world asset onboarding, issuance, and investor administration." },
     ],
   }),
 });
@@ -67,7 +67,7 @@ function IndexPage() {
           >
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary text-primary text-xs font-semibold tracking-wider uppercase mb-6 border border-primary/20">
               <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-              Live Investment Platform
+              Institutional Platform
             </span>
           </motion.div>
 
@@ -77,9 +77,9 @@ function IndexPage() {
             transition={{ duration: 0.8, delay: 0.15 }}
             className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-foreground leading-[1.05] tracking-tight"
           >
-            Invest in{" "}
+            Access{" "}
             <span className="text-gradient-primary">real-world assets</span>{" "}
-            from <span className="text-gradient-accent">$100</span>
+            with <span className="text-gradient-accent">institutional controls</span>
           </motion.h1>
 
           <motion.p
@@ -88,7 +88,7 @@ function IndexPage() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="mt-8 text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto leading-relaxed"
           >
-            Buy a fraction of real estate, gold, and other tangible assets online — fully documented, regulated, and accessible from anywhere.
+            A compliance-led infrastructure for onboarding, issuance, custody coordination, and transparent portfolio administration.
           </motion.p>
 
           <motion.div
@@ -152,10 +152,10 @@ function IndexPage() {
               How It Works
             </span>
             <h2 className="section-heading text-foreground">
-              From real asset to your portfolio
+              From asset onboarding to portfolio oversight
             </h2>
             <p className="mt-5 text-base md:text-lg text-muted-foreground leading-relaxed">
-              A simple, transparent process — from verification to earning returns.
+              A controlled lifecycle designed for documentation, governance, and operational clarity.
             </p>
           </div>
 
@@ -237,12 +237,12 @@ function IndexPage() {
                 Get Started
               </span>
               <h2 className="section-heading text-foreground max-w-2xl">
-                Start investing in{" "}
+                Explore{" "}
                 <span className="text-gradient-primary">real-world assets</span>{" "}
-                today
+                through a compliance-led platform
               </h2>
               <p className="mt-5 text-base md:text-lg text-muted-foreground max-w-xl leading-relaxed">
-                Browse verified opportunities and build your portfolio from $100.
+                Review vetted offerings, disclosures, and governance documentation in one place.
               </p>
               <Link
                 to="/assets"

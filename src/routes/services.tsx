@@ -5,11 +5,11 @@ import PageLayout from "@/components/PageLayout";
 import SectionHeader from "@/components/SectionHeader";
 
 const pillars = [
-  { icon: BarChart3, title: "Insights", description: "Clear analytics and market data so investors and asset owners can make informed decisions." },
-  { icon: Brain, title: "Intelligence", description: "Tools for asset valuation, risk assessment, and market trends — turning data into clear insights." },
-  { icon: Plug, title: "Integrations", description: "Reliable connections between our platform and traditional financial systems and data providers." },
-  { icon: Wallet, title: "Investments", description: "Browse, buy, and sell fractional shares of real assets directly from your account." },
-  { icon: Server, title: "Infrastructure", description: "Bank-grade infrastructure with strong security controls, automation, and reliable uptime." },
+  { icon: BarChart3, title: "Insights", description: "Analytics and reference data that support oversight, reporting, and operational decision-making." },
+  { icon: Brain, title: "Intelligence", description: "Tools for valuation support, risk review, and trend monitoring across asset categories." },
+  { icon: Plug, title: "Integrations", description: "Connections to financial systems, custody workflows, and verified data providers." },
+  { icon: Wallet, title: "Investor Operations", description: "Structured workflows for onboarding, participation, and account administration." },
+  { icon: Server, title: "Infrastructure", description: "Institutional-grade infrastructure with layered security controls and operational resilience." },
 ];
 
 export const Route = createFileRoute("/services")({
@@ -17,9 +17,9 @@ export const Route = createFileRoute("/services")({
   head: () => ({
     meta: [
       { title: "Services — RWA Hub" },
-      { name: "description", content: "Five core services that power investing in real-world assets on RWA Hub." },
+      { name: "description", content: "Five core services supporting compliant real-world asset onboarding, issuance, and administration on RWA Hub." },
       { property: "og:title", content: "Services — RWA Hub" },
-      { property: "og:description", content: "Insights, valuation, integrations, investing, and infrastructure — all in one platform." },
+      { property: "og:description", content: "Insights, valuation support, integrations, investor operations, and infrastructure in one platform." },
     ],
   }),
 });
@@ -33,7 +33,7 @@ function ServicesPage() {
             tag="What We Offer"
             title="Five Core"
             highlight="Services"
-            description="Everything you need to invest in real-world assets — research, transactions, and reliable infrastructure in one place."
+            description="Core platform services for governance, operations, and transparent management of tokenized real-world assets."
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

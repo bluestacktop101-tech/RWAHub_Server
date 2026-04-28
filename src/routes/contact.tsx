@@ -10,9 +10,9 @@ export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: "Contact — RWA Hub" },
-      { name: "description", content: "Get in touch with the RWA Hub team — for investor questions, asset listings, or partnerships." },
+      { name: "description", content: "Contact the RWA Hub team regarding platform access, asset onboarding, compliance, or partnerships." },
       { property: "og:title", content: "Contact — RWA Hub" },
-      { property: "og:description", content: "Talk to our team about investing or listing your asset." },
+      { property: "og:description", content: "Contact our team regarding platform operations, listings, and partnerships." },
     ],
   }),
 });
@@ -34,7 +34,7 @@ function ContactPage() {
             tag="Contact"
             title="Get in"
             highlight="Touch"
-            description="Have a question about investing, want to list an asset, or explore a partnership? Send us a message — we usually reply within one business day."
+            description="For questions about platform access, asset onboarding, compliance, or partnerships, send us a message. We typically respond within one business day."
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
