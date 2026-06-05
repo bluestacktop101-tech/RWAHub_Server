@@ -284,7 +284,7 @@ function ApplyPage() {
             <div className="border-b border-neutral-100 px-6 py-8 md:px-10 md:py-9">
               <div className="flex items-center gap-3">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gradient-primary shadow-sm shadow-primary/20">
-                  <span className="font-display text-sm font-bold text-primary-foreground">R</span>
+                  <img src="/logo.png" />
                 </div>
                 <span className="font-display text-base font-semibold tracking-tight text-neutral-900">
                   RWA <span className="text-gradient-primary">Hub</span>

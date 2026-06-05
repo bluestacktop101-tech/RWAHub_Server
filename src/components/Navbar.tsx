@@ -24,7 +24,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16 md:h-20">
           <Link to="/" className="flex items-center gap-2.5 shrink-0">
             <div className="w-9 h-9 rounded-lg bg-gradient-primary flex items-center justify-center shadow-md shadow-primary/20">
-              <span className="font-display font-bold text-primary-foreground text-sm">R</span>
+              <img src="/logo.png" />
             </div>
             <span className="font-display font-semibold text-lg text-foreground tracking-tight">
               RWA <span className="text-gradient-primary">Hub</span>

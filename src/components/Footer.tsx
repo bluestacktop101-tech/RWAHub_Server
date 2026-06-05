@@ -10,7 +10,7 @@ export default function Footer() {
           <div className="md:col-span-2">
             <Link to="/" className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center">
-                <span className="font-display font-bold text-primary-foreground text-sm">R</span>
+                <img src="/logo.png" />
               </div>
               <span className="font-display font-semibold text-lg text-foreground">
                 RWA <span className="text-gradient-primary">Hub</span>
