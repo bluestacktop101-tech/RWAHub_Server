@@ -8,19 +8,16 @@ const team = [
   {
     name: "Robert Beasock",
     role: "Founder",
-    linkedin: "https://www.linkedin.com/in/robert-beasock-00316027/",
     photo: "/team/Robert.jpg",
   },
   {
     name: "John O'Connor",
     role: "Co-Founder",
-    linkedin: "https://linkedin.com/in/john-o-connor-01940a82",
     photo: "/team/John.jpg",
   },
   {
     name: "Mykhailo Liashenko",
     role: "Chief Technology Officer",
-    linkedin: "https://www.linkedin.com/in/mykhailo-liashenko-633615348/",
     photo: "/team/mykhailo.jpg",
   },
 ];
@@ -68,14 +65,6 @@ function TeamPage() {
                 </div>
                 <h3 className="font-display text-lg font-semibold text-foreground">{member.name}</h3>
                 <p className="text-primary text-sm mt-1">{member.role}</p>
-                <a
-                  href={member.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 mt-4 text-muted-foreground hover:text-primary transition-colors text-sm"
-                >
-                  <Linkedin size={16} /> LinkedIn
-                </a>
               </motion.div>
             ))}
           </div>

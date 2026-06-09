@@ -809,7 +809,7 @@ function HiringPage() {
               We review relevant profiles on an ongoing basis. Send your CV and a short introduction.
             </p>
             <a
-              href="https://www.linkedin.com/company/rwahub"
+              href="https://www.linkedin.com/company/rwahubassets"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-gradient-primary text-primary-foreground font-medium text-sm hover:opacity-90 transition-opacity"

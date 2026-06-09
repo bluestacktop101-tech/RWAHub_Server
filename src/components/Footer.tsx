@@ -20,7 +20,7 @@ export default function Footer() {
               A modern way to invest in real-world assets — real estate, commodities, and funds — starting from $100, with full transparency and investor protection.
             </p>
             <div className="flex gap-3 mt-4">
-              <a href="https://www.linkedin.com/company/rwahub" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-secondary text-muted-foreground hover:text-primary transition-colors">
+              <a href="https://www.linkedin.com/company/rwahubassets" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-secondary text-muted-foreground hover:text-primary transition-colors">
                 <Linkedin size={18} />
               </a>
             </div>
