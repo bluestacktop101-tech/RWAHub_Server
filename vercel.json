@@ -1,5 +1,17 @@
 {
   "framework": "tanstack-start",
   "buildCommand": "npm run build",
-  "installCommand": "npm install"
+  "installCommand": "npm install",
+  "redirects": [
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "rwahubassets.com"
+        }
+      ],
+      "destination": "rwahubassets.com"
+    }
+  ]
 }
