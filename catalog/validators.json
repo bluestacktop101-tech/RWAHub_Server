@@ -1,0 +1,87 @@
+[
+  {
+    "id": "validator1",
+    "name": "Swiss Watch Authority",
+    "avatar": "/assets/hosted/pexels-614810.jpeg",
+    "expertise": [
+      "watches"
+    ],
+    "reputation": 4.9,
+    "jurisdiction": "Switzerland",
+    "validationCount": 287,
+    "verificationFee": {
+      "amount": 500,
+      "currency": "USDT"
+    },
+    "availability": true,
+    "responseTime": "24-48 hours"
+  },
+  {
+    "id": "validator2",
+    "name": "Modern Art Verifiers",
+    "avatar": "/assets/hosted/pexels-220453.jpeg",
+    "expertise": [
+      "art"
+    ],
+    "reputation": 4.7,
+    "jurisdiction": "USA",
+    "validationCount": 153,
+    "verificationFee": {
+      "amount": 300,
+      "currency": "USDT"
+    },
+    "availability": true,
+    "responseTime": "48-72 hours"
+  },
+  {
+    "id": "validator3",
+    "name": "Gem Certification Institute",
+    "avatar": "/assets/hosted/pexels-774909.jpeg",
+    "expertise": [
+      "jewelry"
+    ],
+    "reputation": 4.8,
+    "jurisdiction": "Global",
+    "validationCount": 412,
+    "verificationFee": {
+      "amount": 400,
+      "currency": "USDT"
+    },
+    "availability": true,
+    "responseTime": "24-48 hours"
+  },
+  {
+    "id": "validator4",
+    "name": "Global Property Validators",
+    "avatar": "/assets/hosted/pexels-1222271.jpeg",
+    "expertise": [
+      "real-estate"
+    ],
+    "reputation": 4.6,
+    "jurisdiction": "International",
+    "validationCount": 89,
+    "verificationFee": {
+      "amount": 1000,
+      "currency": "USDT"
+    },
+    "availability": true,
+    "responseTime": "72-96 hours"
+  },
+  {
+    "id": "validator5",
+    "name": "Collectibles Authentication Board",
+    "avatar": "/assets/hosted/pexels-91227.jpeg",
+    "expertise": [
+      "collectibles"
+    ],
+    "reputation": 4.5,
+    "jurisdiction": "USA, EU",
+    "validationCount": 342,
+    "verificationFee": {
+      "amount": 200,
+      "currency": "USDT"
+    },
+    "availability": true,
+    "responseTime": "48-72 hours"
+  }
+]

@@ -1,0 +1,225 @@
+[
+  {
+    "id": "1",
+    "title": "Rolex Daytona 2023",
+    "description": "Limited edition Rolex Daytona with platinum case and ceramic bezel. Complete with original box and papers, purchase date January 2023.",
+    "category": "watches",
+    "status": "validated",
+    "imageUrl": "/assets/watches/rolex-daytona.jpg",
+    "images": [
+      "/assets/watches/rolex-daytona.jpg"
+    ],
+    "price": {
+      "amount": 30000,
+      "currency": "USDT"
+    },
+    "tokenization": {
+      "type": "fractional",
+      "totalTokens": 1000,
+      "availableTokens": 750,
+      "pricePerToken": 30
+    },
+    "listingType": "auction",
+    "isVerified": true,
+    "location": {
+      "address": "Geneva, Switzerland",
+      "city": "Geneva",
+      "country": "Switzerland"
+    },
+    "specifications": {
+      "Brand": "Rolex",
+      "Model": "Daytona",
+      "Reference Number": "116506",
+      "Movement": "Automatic",
+      "Case Material": "Platinum",
+      "Bracelet Material": "Platinum",
+      "Year": "2023",
+      "Condition": "Mint"
+    },
+    "owner": {
+      "id": "user1",
+      "name": "John Smith",
+      "rating": 4.8
+    },
+    "validation": {
+      "status": "validated",
+      "validatedBy": "validator1",
+      "validatedAt": "2024-01-15T00:00:00.000Z",
+      "comments": "Authentic Rolex Daytona with complete documentation."
+    },
+    "createdAt": "2024-01-01T00:00:00.000Z",
+    "updatedAt": "2024-01-15T00:00:00.000Z",
+    "auctionEndTime": "2025-12-01T13:00:00Z",
+    "views": 1250,
+    "likes": 89,
+    "value": 30000,
+    "tokenId": "12345"
+  },
+  {
+    "id": "2",
+    "title": "Abstract Composition #7",
+    "description": "Original canvas painting by emerging artist Maya Lin. Certificate of authenticity included.",
+    "category": "art",
+    "status": "validated",
+    "imageUrl": "/assets/art/abstract-1.jpg",
+    "images": [
+      "/assets/art/abstract-1.jpg"
+    ],
+    "price": {
+      "amount": 15000,
+      "currency": "USDT"
+    },
+    "tokenization": {
+      "type": "fractional",
+      "totalTokens": 500,
+      "availableTokens": 500,
+      "pricePerToken": 30
+    },
+    "listingType": "fixed",
+    "isVerified": true,
+    "owner": {
+      "id": "user2",
+      "name": "Sarah Johnson",
+      "rating": 4.6
+    },
+    "validation": {
+      "status": "validated",
+      "validatedBy": "validator2",
+      "validatedAt": "2024-01-10T00:00:00.000Z",
+      "comments": "Authentic artwork with proper provenance."
+    },
+    "createdAt": "2024-01-05T00:00:00.000Z",
+    "updatedAt": "2024-01-10T00:00:00.000Z",
+    "views": 890,
+    "likes": 67,
+    "value": 15000,
+    "tokenId": "12346"
+  },
+  {
+    "id": "3",
+    "title": "First Edition \"The Great Gatsby\"",
+    "description": "First edition, first printing of F. Scott Fitzgerald's masterpiece, published in 1925. In good condition with original dust jacket.",
+    "category": "collectibles",
+    "status": "pending",
+    "imageUrl": "/assets/collectibles/baseball-cards.png",
+    "images": [
+      "/assets/collectibles/baseball-cards.png"
+    ],
+    "price": {
+      "amount": 7500,
+      "currency": "USDT"
+    },
+    "tokenization": {
+      "type": "whole",
+      "totalTokens": 1,
+      "availableTokens": 1,
+      "pricePerToken": 7500
+    },
+    "listingType": "fixed",
+    "isVerified": false,
+    "owner": {
+      "id": "user3",
+      "name": "Michael Brown",
+      "rating": 4.2
+    },
+    "validation": {
+      "status": "pending"
+    },
+    "createdAt": "2024-01-20T00:00:00.000Z",
+    "updatedAt": "2024-01-20T00:00:00.000Z",
+    "views": 234,
+    "likes": 12,
+    "value": 7500,
+    "tokenId": "12347"
+  },
+  {
+    "id": "4",
+    "title": "Diamond Necklace 18K Gold",
+    "description": "18K gold necklace with 3-carat total weight diamonds, GIA certified.",
+    "category": "jewelry",
+    "status": "validated",
+    "imageUrl": "/assets/jewelry/diamond-ring-1.jpg",
+    "images": [
+      "/assets/jewelry/diamond-ring-1.jpg"
+    ],
+    "price": {
+      "amount": 12000,
+      "currency": "USDT"
+    },
+    "tokenization": {
+      "type": "fractional",
+      "totalTokens": 400,
+      "availableTokens": 400,
+      "pricePerToken": 30
+    },
+    "listingType": "auction",
+    "isVerified": true,
+    "owner": {
+      "id": "user4",
+      "name": "Emily Davis",
+      "rating": 4.9
+    },
+    "validation": {
+      "status": "validated",
+      "validatedBy": "validator3",
+      "validatedAt": "2024-01-12T00:00:00.000Z",
+      "comments": "GIA certified diamonds with proper documentation."
+    },
+    "createdAt": "2024-01-08T00:00:00.000Z",
+    "updatedAt": "2024-01-12T00:00:00.000Z",
+    "auctionEndTime": "2025-11-15T13:00:00Z",
+    "views": 567,
+    "likes": 45,
+    "value": 12000,
+    "tokenId": "12348"
+  },
+  {
+    "id": "5",
+    "title": "Luxury Beachfront Villa",
+    "description": "Spectacular 5-bedroom beachfront villa in Malibu with direct ocean access, infinity pool, and smart home features.",
+    "category": "real-estate",
+    "status": "validated",
+    "imageUrl": "/assets/real-estate/villa-1.jpg.svg",
+    "images": [
+      "/assets/real-estate/villa-1.jpg.svg"
+    ],
+    "price": {
+      "amount": 2500000,
+      "currency": "USDT"
+    },
+    "tokenization": {
+      "type": "fractional",
+      "totalTokens": 10000,
+      "availableTokens": 10000,
+      "pricePerToken": 250
+    },
+    "listingType": "fixed",
+    "isVerified": true,
+    "location": {
+      "address": "123 Ocean Drive, Malibu, CA",
+      "city": "Malibu",
+      "country": "USA",
+      "coordinates": {
+        "lat": 34.0259,
+        "lng": -118.7798
+      }
+    },
+    "owner": {
+      "id": "user5",
+      "name": "Robert Wilson",
+      "rating": 4.7
+    },
+    "validation": {
+      "status": "validated",
+      "validatedBy": "validator4",
+      "validatedAt": "2024-01-18T00:00:00.000Z",
+      "comments": "Property verified with proper title and valuation."
+    },
+    "createdAt": "2024-01-15T00:00:00.000Z",
+    "updatedAt": "2024-01-18T00:00:00.000Z",
+    "views": 2100,
+    "likes": 156,
+    "value": 2500000,
+    "tokenId": "12349"
+  }
+]

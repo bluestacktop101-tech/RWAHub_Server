@@ -1,0 +1,64 @@
+[
+  {
+    "id": "user1",
+    "email": "john@example.com",
+    "name": "John Smith",
+    "avatar": "/assets/hosted/pexels-614810.jpeg",
+    "roles": [
+      "seller"
+    ],
+    "kyc": {
+      "status": "verified",
+      "documents": {
+        "idVerification": {
+          "id": "doc1",
+          "type": "id_verification",
+          "url": "/documents/user1/id.pdf",
+          "name": "ID Verification",
+          "verified": true,
+          "uploadedAt": "2024-01-01T00:00:00.000Z"
+        }
+      },
+      "verifiedAt": "2024-01-01T00:00:00.000Z"
+    },
+    "wallet": {
+      "address": "0x1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t",
+      "balance": 50000,
+      "currency": "USDT"
+    },
+    "stats": {
+      "assetsListed": 3,
+      "assetsSold": 1,
+      "assetsBought": 0,
+      "totalValue": 45000,
+      "rating": 4.8,
+      "reviews": 12
+    },
+    "createdAt": "2024-01-01T00:00:00.000Z",
+    "updatedAt": "2024-01-20T00:00:00.000Z"
+  },
+  {
+    "id": "demo-rwahub",
+    "email": "demo@rwahub.com",
+    "password": "$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+    "name": "Demo User",
+    "roles": [
+      "buyer",
+      "seller"
+    ]
+  },
+  {
+    "id": "demo-frontend",
+    "email": "demo@example.com",
+    "password": "$2a$10$/Pc4IPXzHCG8cJUy9KAz/O09MnIz5e9zq3rrnDT3id1vLVGCrYN2m",
+    "name": "Demo User",
+    "roles": {
+      "isBuyer": true,
+      "isSeller": false
+    },
+    "stats": {
+      "totalPurchases": 0,
+      "totalSales": 0
+    }
+  }
+]

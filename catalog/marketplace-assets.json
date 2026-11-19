@@ -1,0 +1,126 @@
+[
+  {
+    "id": "1",
+    "title": "Rolex Daytona 2023",
+    "category": "watches",
+    "price": {
+      "amount": 30000,
+      "currency": "USDT"
+    },
+    "imageUrl": "/assets/hosted/pexels-9978722.jpeg",
+    "isVerified": true,
+    "validator": "Swiss Watch Authority",
+    "description": "Limited edition Rolex Daytona with platinum case and ceramic bezel. Complete with original box and papers, purchase date January 2023.",
+    "ownerAddress": "0x1a2b3c...",
+    "tokenId": "12345",
+    "specifications": {
+      "Brand": "Rolex",
+      "Model": "Daytona",
+      "Reference Number": "116506",
+      "Movement": "Automatic",
+      "Case Material": "Platinum",
+      "Bracelet Material": "Platinum",
+      "Year": "2023",
+      "Condition": "Mint"
+    },
+    "listingType": "auction",
+    "auctionEndTime": "2025-12-01T13:00:00Z"
+  },
+  {
+    "id": "2",
+    "title": "Abstract Composition #7",
+    "category": "art",
+    "price": {
+      "amount": 15000,
+      "currency": "USDT"
+    },
+    "imageUrl": "/assets/hosted/pexels-1585325.jpeg",
+    "isVerified": true,
+    "validator": "Modern Art Verifiers",
+    "description": "Original canvas painting by emerging artist Maya Lin. Certificate of authenticity included.",
+    "listingType": "fixed"
+  },
+  {
+    "id": "3",
+    "title": "First Edition \"The Great Gatsby\"",
+    "category": "collectibles",
+    "price": {
+      "amount": 7500,
+      "currency": "USDT"
+    },
+    "imageUrl": "/assets/hosted/pexels-46274.jpeg",
+    "isVerified": false,
+    "description": "First edition, first printing of F. Scott Fitzgerald's masterpiece, published in 1925. In good condition with original dust jacket.",
+    "listingType": "fixed"
+  },
+  {
+    "id": "4",
+    "title": "Diamond Necklace 18K Gold",
+    "category": "jewelry",
+    "price": {
+      "amount": 12000,
+      "currency": "USDT"
+    },
+    "imageUrl": "/assets/hosted/pexels-1191531.jpeg",
+    "isVerified": true,
+    "validator": "Gem Certification Institute",
+    "description": "18K gold necklace with 3-carat total weight diamonds, GIA certified.",
+    "listingType": "auction",
+    "auctionEndTime": "2025-11-15T13:00:00Z"
+  },
+  {
+    "id": "5",
+    "title": "Patek Philippe Nautilus",
+    "category": "watches",
+    "price": {
+      "amount": 90000,
+      "currency": "USDT"
+    },
+    "imageUrl": "/assets/hosted/pexels-190819.jpeg",
+    "isVerified": true,
+    "validator": "Swiss Watch Authority",
+    "description": "Rare Patek Philippe Nautilus 5711 in stainless steel. Full set with box and papers.",
+    "listingType": "fixed"
+  },
+  {
+    "id": "6",
+    "title": "Luxury Beachfront Villa",
+    "category": "real-estate",
+    "price": {
+      "amount": 2500000,
+      "currency": "USDT"
+    },
+    "imageUrl": "/assets/hosted/pexels-32870.jpg",
+    "isVerified": true,
+    "validator": "Global Property Validators",
+    "description": "Spectacular 5-bedroom beachfront villa in Malibu with direct ocean access, infinity pool, and smart home features.",
+    "listingType": "lend"
+  },
+  {
+    "id": "7",
+    "title": "Banksy Limited Print",
+    "category": "art",
+    "price": {
+      "amount": 45000,
+      "currency": "USDT"
+    },
+    "imageUrl": "/assets/hosted/pexels-20967.jpg",
+    "isVerified": true,
+    "validator": "Urban Art Authenticators",
+    "description": "Limited edition Banksy print, hand-numbered 23/150, with certificate of authenticity from Pest Control.",
+    "listingType": "swap"
+  },
+  {
+    "id": "8",
+    "title": "Vintage Porsche 911",
+    "category": "collectibles",
+    "price": {
+      "amount": 180000,
+      "currency": "USDT"
+    },
+    "imageUrl": "/assets/hosted/pexels-3136673.jpeg",
+    "isVerified": false,
+    "description": "1973 Porsche 911 Carrera RS in Gulf Blue. Numbers matching, documented history, recently restored.",
+    "listingType": "fixed"
+  }
+]

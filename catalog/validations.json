@@ -1,0 +1,26 @@
+[
+  {
+    "id": "v1",
+    "assetId": "2",
+    "status": "pending",
+    "validatorId": "validator789",
+    "requestedAt": "2024-02-01T00:00:00.000Z",
+    "notes": "Awaiting authentication documents"
+  },
+  {
+    "id": "v2",
+    "assetId": "3",
+    "status": "action_required",
+    "validatorId": "validator456",
+    "requestedAt": "2024-01-25T00:00:00.000Z",
+    "notes": "Additional certification required"
+  },
+  {
+    "id": "v3",
+    "assetId": "5",
+    "status": "action_required",
+    "validatorId": "validator123",
+    "requestedAt": "2024-02-05T00:00:00.000Z",
+    "notes": "Condition report needed"
+  }
+]

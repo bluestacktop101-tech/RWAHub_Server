@@ -1,0 +1,176 @@
+[
+  {
+    "id": "1",
+    "name": "Swiss Watch Authority",
+    "avatar": "/assets/hosted/pexels-614810.jpeg",
+    "expertise": [
+      "watches"
+    ],
+    "reputation": 4.9,
+    "jurisdiction": "Switzerland",
+    "validationCount": 287
+  },
+  {
+    "id": "2",
+    "name": "Modern Art Verifiers",
+    "avatar": "/assets/hosted/pexels-220453.jpeg",
+    "expertise": [
+      "art"
+    ],
+    "reputation": 4.7,
+    "jurisdiction": "USA",
+    "validationCount": 153
+  },
+  {
+    "id": "3",
+    "name": "Gem Certification Institute",
+    "avatar": "/assets/hosted/pexels-774909.jpeg",
+    "expertise": [
+      "jewelry"
+    ],
+    "reputation": 4.8,
+    "jurisdiction": "Global",
+    "validationCount": 412
+  },
+  {
+    "id": "4",
+    "name": "Global Property Validators",
+    "avatar": "/assets/hosted/pexels-1222271.jpeg",
+    "expertise": [
+      "real-estate"
+    ],
+    "reputation": 4.6,
+    "jurisdiction": "International",
+    "validationCount": 89
+  },
+  {
+    "id": "5",
+    "name": "Collectibles Authentication Board",
+    "avatar": "/assets/hosted/pexels-91227.jpeg",
+    "expertise": [
+      "collectibles"
+    ],
+    "reputation": 4.5,
+    "jurisdiction": "USA, EU",
+    "validationCount": 342
+  },
+  {
+    "id": "6",
+    "name": "Urban Art Authenticators",
+    "avatar": "/assets/hosted/pexels-1239291.jpeg",
+    "expertise": [
+      "art"
+    ],
+    "reputation": 4.9,
+    "jurisdiction": "UK",
+    "validationCount": 127
+  },
+  {
+    "id": "1",
+    "name": "John Anderson",
+    "expertise": [
+      "watches",
+      "jewelry"
+    ],
+    "jurisdiction": "United States",
+    "validationCount": 156,
+    "reputation": 4.8,
+    "avatar": "/assets/hosted/unsplash-1472099645785-5658abf4ff4e.jpg",
+    "verificationFee": {
+      "amount": 500,
+      "currency": "USD"
+    },
+    "availability": true,
+    "responseTime": "24-48 hours"
+  },
+  {
+    "id": "2",
+    "name": "Sarah Chen",
+    "expertise": [
+      "art",
+      "collectibles"
+    ],
+    "jurisdiction": "Singapore",
+    "validationCount": 243,
+    "reputation": 4.9,
+    "avatar": "/assets/hosted/unsplash-1438761681033-6461ffad8d80.jpg",
+    "verificationFee": {
+      "amount": 750,
+      "currency": "USD"
+    },
+    "availability": true,
+    "responseTime": "24 hours"
+  },
+  {
+    "id": "3",
+    "name": "Michael Roberts",
+    "expertise": [
+      "real-estate"
+    ],
+    "jurisdiction": "United Kingdom",
+    "validationCount": 89,
+    "reputation": 4.7,
+    "avatar": "/assets/hosted/unsplash-1500648767791-00dcc994a43e.jpg",
+    "verificationFee": {
+      "amount": 1200,
+      "currency": "USD"
+    },
+    "availability": true,
+    "responseTime": "48-72 hours"
+  },
+  {
+    "id": "4",
+    "name": "Emily Thompson",
+    "expertise": [
+      "jewelry",
+      "art"
+    ],
+    "jurisdiction": "Canada",
+    "validationCount": 167,
+    "reputation": 4.9,
+    "avatar": "/assets/hosted/unsplash-1494790108377-be9c29b29330.jpg",
+    "verificationFee": {
+      "amount": 600,
+      "currency": "USD"
+    },
+    "availability": false,
+    "responseTime": "24-48 hours"
+  },
+  {
+    "id": "5",
+    "name": "David Kim",
+    "expertise": [
+      "watches",
+      "collectibles"
+    ],
+    "jurisdiction": "South Korea",
+    "validationCount": 198,
+    "reputation": 4.8,
+    "avatar": "/assets/hosted/unsplash-1507003211169-0a1dd7228f2d.jpg",
+    "verificationFee": {
+      "amount": 550,
+      "currency": "USD"
+    },
+    "availability": true,
+    "responseTime": "24 hours"
+  },
+  {
+    "id": "6",
+    "name": "Maria Garcia",
+    "expertise": [
+      "art",
+      "collectibles",
+      "jewelry"
+    ],
+    "jurisdiction": "Spain",
+    "validationCount": 134,
+    "reputation": 4.7,
+    "avatar": "/assets/hosted/unsplash-1487412720507-e7ab37603c6f.jpg",
+    "verificationFee": {
+      "amount": 650,
+      "currency": "USD"
+    },
+    "availability": true,
+    "responseTime": "24-48 hours"
+  }
+]

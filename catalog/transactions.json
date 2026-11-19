@@ -1,0 +1,32 @@
+[
+  {
+    "id": "t1",
+    "type": "buy",
+    "assetId": "1",
+    "amount": 180000,
+    "status": "completed",
+    "date": "2024-01-15T00:00:00.000Z",
+    "from": "seller456",
+    "to": "user123"
+  },
+  {
+    "id": "t2",
+    "type": "tokenize",
+    "assetId": "2",
+    "amount": 15000,
+    "status": "pending",
+    "date": "2024-02-01T00:00:00.000Z",
+    "from": "user123",
+    "to": "system"
+  },
+  {
+    "id": "t3",
+    "type": "validate",
+    "assetId": "3",
+    "amount": 45000,
+    "status": "pending",
+    "date": "2024-01-25T00:00:00.000Z",
+    "from": "user123",
+    "to": "validator789"
+  }
+]
