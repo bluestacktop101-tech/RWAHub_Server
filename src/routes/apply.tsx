@@ -171,6 +171,7 @@ function ApplyPage() {
 
     setSubmitting(true);
 
+    try {
     const folder = crypto.randomUUID();
 
     const resumePath = `${folder}/resume-${safeStorageSegment(resumeFile.name)}`;
@@ -226,6 +227,14 @@ function ApplyPage() {
     }
 
     setSubmitted(true);
+    } catch (submitError) {
+      setSubmitting(false);
+      const message = submitError instanceof Error ? submitError.message : "Failed to submit application. Please try again.";
+      setError(message.includes("Supabase")
+        ? "Application storage is not configured on this deployment."
+        : message);
+      console.error(submitError);
+    }
   };
 
   if (submitted) {

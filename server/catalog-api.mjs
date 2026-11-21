@@ -112,6 +112,58 @@ function getUser(id) {
   return listUsers().find((user) => user.id === id) || null;
 }
 
+const ADMIN_TABLES = {
+  assets: 'assets.json',
+  users: 'users.json',
+  validators: 'validators.json',
+  transactions: 'transactions.json',
+  validations: 'validations.json',
+  dashboardAssets: 'dashboard-assets.json',
+  marketplaceAssets: 'marketplace-assets.json',
+  extraValidators: 'extra-validators.json',
+};
+
+function hidePassword(record) {
+  if (!record || typeof record !== 'object' || !Object.prototype.hasOwnProperty.call(record, 'password')) return record;
+  const { password, ...rest } = record;
+  return { ...rest, password: password ? '••••' : '' };
+}
+
+export function adminTables() {
+  return Object.entries(ADMIN_TABLES).map(([name, file]) => ({
+    name,
+    count: readList(file).length,
+  }));
+}
+
+export function adminRecords(table) {
+  const file = ADMIN_TABLES[table];
+  if (!file) return null;
+  return readList(file).map(hidePassword);
+}
+
+export function adminSave(table, record) {
+  const file = ADMIN_TABLES[table];
+  if (!file || !record || typeof record !== 'object') return null;
+  const records = readList(file);
+  const id = record.id || randomUUID();
+  const index = records.findIndex((item) => item && item.id === id);
+  const next = { ...record, id };
+  if (next.password === '••••' && index !== -1) next.password = records[index].password;
+  if (!next.password) delete next.password;
+  if (index === -1) records.unshift(next);
+  else records[index] = { ...records[index], ...next, id };
+  writeList(file, records);
+  return hidePassword(index === -1 ? records[0] : records[index]);
+}
+
+export function adminRemove(table, id) {
+  const file = ADMIN_TABLES[table];
+  if (!file || !id) return false;
+  writeList(file, readList(file).filter((item) => item && item.id !== id));
+  return true;
+}
+
 function saveUser(user) {
   const users = listUsers();
   const index = users.findIndex((item) => item.id === user.id);

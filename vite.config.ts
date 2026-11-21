@@ -1,5 +1,6 @@
 import path from "node:path";
 import { pathToFileURL } from "node:url";
+import { loadEnv } from "vite";
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 import { nitro } from "nitro/vite";
 
@@ -69,14 +70,34 @@ function catalogApiPlugin() {
  * TanStack Start does not need the Nitro Vite plugin during local dev (only for the
  * production Nitro bundle). Omit `nitro()` while `command === "serve"`.
  */
-export default defineConfig(async (env) => ({
-  resolve: {
-    alias: {
-      "cloudflare:sockets": path.resolve("server/cloudflare-sockets-shim.mjs"),
+export default defineConfig(async (env) => {
+  const fileEnv = loadEnv(env.mode, process.cwd(), "");
+  const supabaseUrl =
+    fileEnv.VITE_SUPABASE_URL ||
+    fileEnv.SUPABASE_URL ||
+    process.env.VITE_SUPABASE_URL ||
+    process.env.SUPABASE_URL ||
+    "";
+  const supabaseKey =
+    fileEnv.VITE_SUPABASE_PUBLISHABLE_KEY ||
+    fileEnv.SUPABASE_PUBLISHABLE_KEY ||
+    process.env.VITE_SUPABASE_PUBLISHABLE_KEY ||
+    process.env.SUPABASE_PUBLISHABLE_KEY ||
+    "";
+
+  return {
+    define: {
+      "import.meta.env.VITE_SUPABASE_URL": JSON.stringify(supabaseUrl),
+      "import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY": JSON.stringify(supabaseKey),
     },
-  },
-  plugins: [
-    catalogApiPlugin(),
-    ...(env.command === "build" ? [nitro({ serverDir: path.resolve("server") })] : []),
-  ],
-}));
+    resolve: {
+      alias: {
+        "cloudflare:sockets": path.resolve("server/cloudflare-sockets-shim.mjs"),
+      },
+    },
+    plugins: [
+      catalogApiPlugin(),
+      ...(env.command === "build" ? [nitro({ serverDir: path.resolve("server") })] : []),
+    ],
+  };
+});
