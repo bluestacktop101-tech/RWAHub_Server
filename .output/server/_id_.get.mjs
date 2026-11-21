@@ -11,9 +11,9 @@ import "node:fs";
 import "node:path";
 import "node:crypto";
 import "node:url";
-const _id__get = defineEventHandler((event) => {
+const _id__get = defineEventHandler(async (event) => {
   const id = getRouterParam(event, "id");
-  const result = handleCatalog("GET", `/records/assets/${id}`);
+  const result = await handleCatalog("GET", `/records/assets/${id}`);
   setResponseStatus(event, result.status);
   return result.body;
 });

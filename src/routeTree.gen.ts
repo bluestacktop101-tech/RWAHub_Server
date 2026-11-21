@@ -16,8 +16,8 @@ import { Route as ApplyRouteImport } from './routes/apply'
 import { Route as AssetsRouteImport } from './routes/assets'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as HiringRouteImport } from './routes/hiring'
-import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ServerLogRouteImport } from './routes/server-log'
+import { Route as ServicesRouteImport } from './routes/services'
 import { Route as TeamRouteImport } from './routes/team'
 import { Route as TechnologyRouteImport } from './routes/technology'
 
@@ -26,14 +26,14 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminRoute = AdminRouteImport.update({
-  id: '/admin',
-  path: '/admin',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApplyRoute = ApplyRouteImport.update({
@@ -56,14 +56,14 @@ const HiringRoute = HiringRouteImport.update({
   path: '/hiring',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ServicesRoute = ServicesRouteImport.update({
-  id: '/services',
-  path: '/services',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ServerLogRoute = ServerLogRouteImport.update({
   id: '/server-log',
   path: '/server-log',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesRoute = ServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TeamRoute = TeamRouteImport.update({
@@ -79,41 +79,41 @@ const TechnologyRoute = TechnologyRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRoute
   '/apply': typeof ApplyRoute
   '/assets': typeof AssetsRoute
   '/contact': typeof ContactRoute
   '/hiring': typeof HiringRoute
-  '/services': typeof ServicesRoute
   '/server-log': typeof ServerLogRoute
+  '/services': typeof ServicesRoute
   '/team': typeof TeamRoute
   '/technology': typeof TechnologyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRoute
   '/apply': typeof ApplyRoute
   '/assets': typeof AssetsRoute
   '/contact': typeof ContactRoute
   '/hiring': typeof HiringRoute
-  '/services': typeof ServicesRoute
   '/server-log': typeof ServerLogRoute
+  '/services': typeof ServicesRoute
   '/team': typeof TeamRoute
   '/technology': typeof TechnologyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRoute
   '/apply': typeof ApplyRoute
   '/assets': typeof AssetsRoute
   '/contact': typeof ContactRoute
   '/hiring': typeof HiringRoute
-  '/services': typeof ServicesRoute
   '/server-log': typeof ServerLogRoute
+  '/services': typeof ServicesRoute
   '/team': typeof TeamRoute
   '/technology': typeof TechnologyRoute
 }
@@ -121,54 +121,54 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/admin'
     | '/about'
+    | '/admin'
     | '/apply'
     | '/assets'
     | '/contact'
     | '/hiring'
-    | '/services'
     | '/server-log'
+    | '/services'
     | '/team'
     | '/technology'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/admin'
     | '/about'
+    | '/admin'
     | '/apply'
     | '/assets'
     | '/contact'
     | '/hiring'
-    | '/services'
     | '/server-log'
+    | '/services'
     | '/team'
     | '/technology'
   id:
     | '__root__'
     | '/'
-    | '/admin'
     | '/about'
+    | '/admin'
     | '/apply'
     | '/assets'
     | '/contact'
     | '/hiring'
-    | '/services'
     | '/server-log'
+    | '/services'
     | '/team'
     | '/technology'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AdminRoute: typeof AdminRoute
   AboutRoute: typeof AboutRoute
+  AdminRoute: typeof AdminRoute
   ApplyRoute: typeof ApplyRoute
   AssetsRoute: typeof AssetsRoute
   ContactRoute: typeof ContactRoute
   HiringRoute: typeof HiringRoute
-  ServicesRoute: typeof ServicesRoute
   ServerLogRoute: typeof ServerLogRoute
+  ServicesRoute: typeof ServicesRoute
   TeamRoute: typeof TeamRoute
   TechnologyRoute: typeof TechnologyRoute
 }
@@ -182,18 +182,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin': {
-      id: '/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AdminRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/about': {
       id: '/about'
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/apply': {
@@ -224,18 +224,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HiringRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/services': {
-      id: '/services'
-      path: '/services'
-      fullPath: '/services'
-      preLoaderRoute: typeof ServicesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/server-log': {
       id: '/server-log'
       path: '/server-log'
       fullPath: '/server-log'
       preLoaderRoute: typeof ServerLogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services': {
+      id: '/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof ServicesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/team': {
@@ -257,14 +257,14 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AdminRoute: AdminRoute,
   AboutRoute: AboutRoute,
+  AdminRoute: AdminRoute,
   ApplyRoute: ApplyRoute,
   AssetsRoute: AssetsRoute,
   ContactRoute: ContactRoute,
   HiringRoute: HiringRoute,
-  ServicesRoute: ServicesRoute,
   ServerLogRoute: ServerLogRoute,
+  ServicesRoute: ServicesRoute,
   TeamRoute: TeamRoute,
   TechnologyRoute: TechnologyRoute,
 }

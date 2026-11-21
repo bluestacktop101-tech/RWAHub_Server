@@ -11,7 +11,7 @@ import "node:fs";
 import "node:path";
 import "node:crypto";
 import "node:url";
-const assets_get = defineEventHandler(() => handleCatalog("GET", "/records/assets").body);
+const assets_get = defineEventHandler(async () => (await handleCatalog("GET", "/records/assets")).body);
 export {
   assets_get as default
 };

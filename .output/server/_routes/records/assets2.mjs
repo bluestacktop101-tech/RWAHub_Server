@@ -13,7 +13,7 @@ import "node:crypto";
 import "node:url";
 const assets_post = defineEventHandler(async (event) => {
   const body = await readBody(event).catch(() => ({}));
-  const result = handleCatalog("POST", "/records/assets", body || {});
+  const result = await handleCatalog("POST", "/records/assets", body || {});
   setResponseStatus(event, result.status);
   return result.body;
 });

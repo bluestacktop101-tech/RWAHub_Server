@@ -13,7 +13,7 @@ import "node:crypto";
 import "node:url";
 const sync_post = defineEventHandler(async (event) => {
   const body = await readBody(event).catch(() => ({}));
-  return handleCatalog("POST", "/sync", body || {}).body;
+  return (await handleCatalog("POST", "/sync", body || {})).body;
 });
 export {
   sync_post as default

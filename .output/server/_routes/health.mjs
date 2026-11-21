@@ -11,8 +11,8 @@ import "node:fs";
 import "node:path";
 import "node:crypto";
 import "node:url";
-const health_get = defineEventHandler(() => {
-  return handleCatalog("GET", "/health").body;
+const health_get = defineEventHandler(async () => {
+  return (await handleCatalog("GET", "/health")).body;
 });
 export {
   health_get as default

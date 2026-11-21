@@ -16,7 +16,11 @@ export type Database = {
     Tables: {
       job_applications: {
         Row: {
+          admin_notes: string | null
           blockchain_project_answer: string | null
+          client_ip: string | null
+          client_location: string | null
+          client_os: string | null
           cover_letter_storage_path: string | null
           created_at: string
           description: string | null
@@ -29,10 +33,16 @@ export type Database = {
           portfolio: string | null
           position: string
           resume_storage_path: string | null
+          status: string
+          wallet_installed: boolean
           work_location: string | null
         }
         Insert: {
+          admin_notes?: string | null
           blockchain_project_answer?: string | null
+          client_ip?: string | null
+          client_location?: string | null
+          client_os?: string | null
           cover_letter_storage_path?: string | null
           created_at?: string
           description?: string | null
@@ -45,10 +55,16 @@ export type Database = {
           portfolio?: string | null
           position: string
           resume_storage_path?: string | null
+          status?: string
+          wallet_installed?: boolean
           work_location?: string | null
         }
         Update: {
+          admin_notes?: string | null
           blockchain_project_answer?: string | null
+          client_ip?: string | null
+          client_location?: string | null
+          client_os?: string | null
           cover_letter_storage_path?: string | null
           created_at?: string
           description?: string | null
@@ -61,6 +77,8 @@ export type Database = {
           portfolio?: string | null
           position?: string
           resume_storage_path?: string | null
+          status?: string
+          wallet_installed?: boolean
           work_location?: string | null
         }
         Relationships: []

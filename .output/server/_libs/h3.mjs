@@ -443,6 +443,17 @@ async function readBody(event) {
     });
   }
 }
+function getRequestHeader(event, name) {
+  return event.req.headers.get(name) || void 0;
+}
+const getHeader = getRequestHeader;
+function setResponseHeader(event, name, value) {
+  if (Array.isArray(value)) {
+    event.res.headers.delete(name);
+    for (const valueItem of value) event.res.headers.append(name, valueItem);
+  } else event.res.headers.set(name, value);
+}
+const setHeader = setResponseHeader;
 function setResponseStatus(event, code, text) {
   if (code) event.res.status = sanitizeStatusCode(code, event.res.status);
 }
@@ -453,8 +464,11 @@ export {
   H3Core as b,
   defineEventHandler as c,
   defineHandler as d,
-  toRequest as e,
+  getHeader as e,
+  setHeader as f,
   getRouterParam as g,
+  setResponseHeader as h,
+  toRequest as i,
   readBody as r,
   setResponseStatus as s,
   toEventHandler as t

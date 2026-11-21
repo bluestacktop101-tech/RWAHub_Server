@@ -4,7 +4,8 @@ import { motion } from "framer-motion";
 import { Send, ArrowLeft } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
 import { FileDropzone } from "@/components/FileDropzone";
-import { supabase } from "@/integrations/supabase/client";
+import { collectApplyClientMeta } from "@/lib/apply-client-context";
+import { submitJobApplication } from "@/lib/submit-job-application";
 
 export const Route = createFileRoute("/apply")({
   component: ApplyPage,
@@ -21,118 +22,21 @@ export const Route = createFileRoute("/apply")({
   }),
 });
 
-const STORAGE_BUCKET = "job-application-files";
-
 const inputClass =
   "w-full rounded-md border border-neutral-300 bg-white px-3 py-2.5 text-sm text-neutral-900 shadow-sm placeholder:text-neutral-400 focus:border-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-900/10";
 
-function safeStorageSegment(name: string): string {
-  return name.replace(/[^\w.\-()+ ]/g, "_").slice(0, 180);
-}
-
-function buildLegacyDescription(formData: {
-  blockchainAnswer: string;
-  workLocation: string;
-  phone: string;
-  linkedin: string;
-  github: string;
-  resumePath: string;
-  coverLetterPath: string | null;
-}): string {
-  const lines = [
-    formData.blockchainAnswer.trim(),
-    "",
-    `Anticipated work location: ${formData.workLocation.trim()}`,
-    formData.phone.trim() ? `Phone: ${formData.phone.trim()}` : null,
-    formData.linkedin.trim() ? `LinkedIn: ${formData.linkedin.trim()}` : null,
-    formData.github.trim() ? `GitHub: ${formData.github.trim()}` : null,
-    formData.coverLetterPath ? `Cover letter (storage path): ${formData.coverLetterPath}` : null,
-    `Resume (storage path): ${formData.resumePath}`,
-  ].filter(Boolean) as string[];
-  return lines.join("\n");
-}
-
-/** Primary row shape (needs migration). Falls back to legacy columns if DB is older. */
-async function insertJobApplication(params: {
-  position: string;
-  formData: {
-    fullName: string;
-    email: string;
-    phone: string;
-    linkedin: string;
-    github: string;
-    blockchainAnswer: string;
-    workLocation: string;
-  };
-  resumePath: string;
-  coverLetterPath: string | null;
-}) {
-  const { position, formData, resumePath, coverLetterPath } = params;
-
-  const fullRow = {
-    position: position || "General",
-    full_name: formData.fullName.trim(),
-    email: formData.email.trim(),
-    github: formData.github.trim() || null,
-    portfolio: null as string | null,
-    description: null as string | null,
-    phone: formData.phone.trim() || null,
-    linkedin: formData.linkedin.trim() || null,
-    resume_storage_path: resumePath,
-    cover_letter_storage_path: coverLetterPath,
-    blockchain_project_answer: formData.blockchainAnswer.trim(),
-    work_location: formData.workLocation.trim(),
-  };
-
-  const { error: fullError } = await supabase.from("job_applications").insert(fullRow);
-
-  if (!fullError) return { ok: true as const, error: null };
-
-  const hint = `${fullError.message ?? ""} ${(fullError as { details?: string }).details ?? ""}`.toLowerCase();
-  const isRlsDeny =
-    hint.includes("row-level security") ||
-    hint.includes("permission denied") ||
-    fullError.code === "42501";
-
-  if (isRlsDeny) return { ok: false as const, error: fullError };
-
-  const looksLikeLegacyDb =
-    hint.includes("column") ||
-    hint.includes("does not exist") ||
-    hint.includes("schema cache") ||
-    hint.includes("violates not-null") ||
-    hint.includes("not null constraint") ||
-    fullError.code === "PGRST204" ||
-    fullError.code === "42703" ||
-    fullError.code === "23502";
-
-  if (!looksLikeLegacyDb) {
-    return { ok: false as const, error: fullError };
-  }
-
-  const description = buildLegacyDescription({
-    blockchainAnswer: formData.blockchainAnswer,
-    workLocation: formData.workLocation,
-    phone: formData.phone,
-    linkedin: formData.linkedin,
-    github: formData.github,
-    resumePath,
-    coverLetterPath,
+async function fileToPayload(file: File) {
+  const base64 = await new Promise<string>((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const value = String(reader.result || "");
+      const comma = value.indexOf(",");
+      resolve(comma >= 0 ? value.slice(comma + 1) : value);
+    };
+    reader.onerror = () => reject(new Error("Could not read file."));
+    reader.readAsDataURL(file);
   });
-
-  const legacyRow = {
-    position: position || "General",
-    full_name: formData.fullName.trim(),
-    email: formData.email.trim(),
-    github: formData.github.trim() || null,
-    portfolio: `${STORAGE_BUCKET}/${resumePath}`,
-    description,
-  };
-
-  const { error: legacyError } = await supabase.from("job_applications").insert(legacyRow);
-
-  if (!legacyError) return { ok: true as const, error: null };
-  return { ok: false as const, error: legacyError };
+  return { name: file.name, type: file.type, base64 };
 }
 
 function ApplyPage() {
@@ -172,68 +76,43 @@ function ApplyPage() {
     setSubmitting(true);
 
     try {
-    const folder = crypto.randomUUID();
+      const [resume, coverLetter, clientMeta] = await Promise.all([
+        fileToPayload(resumeFile),
+        coverLetterFile ? fileToPayload(coverLetterFile) : Promise.resolve(null),
+        collectApplyClientMeta(),
+      ]);
 
-    const resumePath = `${folder}/resume-${safeStorageSegment(resumeFile.name)}`;
-    const { error: resumeUploadError } = await supabase.storage
-      .from(STORAGE_BUCKET)
-      .upload(resumePath, resumeFile, {
-        contentType: resumeFile.type || undefined,
-        upsert: false,
+      const result = await submitJobApplication({
+        data: {
+          position,
+          fullName: formData.fullName,
+          email: formData.email,
+          phone: formData.phone,
+          linkedin: formData.linkedin,
+          github: formData.github,
+          blockchainAnswer: formData.blockchainAnswer,
+          workLocation: formData.workLocation,
+          resume,
+          coverLetter,
+          clientMeta,
+        },
       });
 
-    if (resumeUploadError) {
-      setSubmitting(false);
-      setError("Could not upload resume. Check your connection or try again.");
-      console.error(resumeUploadError);
-      return;
-    }
-
-    let coverLetterPath: string | null = null;
-    if (coverLetterFile) {
-      coverLetterPath = `${folder}/cover-${safeStorageSegment(coverLetterFile.name)}`;
-      const { error: coverErr } = await supabase.storage
-        .from(STORAGE_BUCKET)
-        .upload(coverLetterPath, coverLetterFile, {
-          contentType: coverLetterFile.type || undefined,
-          upsert: false,
-        });
-      if (coverErr) {
-        setSubmitting(false);
-        setError("Resume was uploaded but cover letter upload failed. Please try again.");
-        console.error(coverErr);
+      if (!result.ok) {
+        setError(result.error);
         return;
       }
-    }
 
-    const { ok, error: insertError } = await insertJobApplication({
-      position,
-      formData,
-      resumePath,
-      coverLetterPath,
-    });
-
-    setSubmitting(false);
-
-    if (!ok && insertError) {
-      const toRemove = [resumePath, ...(coverLetterPath ? [coverLetterPath] : [])];
-      await supabase.storage.from(STORAGE_BUCKET).remove(toRemove);
-      const detail = [insertError.message, (insertError as { details?: string }).details]
-        .filter(Boolean)
-        .join(" ");
-      setError(detail ? `Could not save application: ${detail}` : "Failed to submit application. Please try again.");
-      console.error(insertError);
-      return;
-    }
-
-    setSubmitted(true);
+      setSubmitted(true);
     } catch (submitError) {
-      setSubmitting(false);
-      const message = submitError instanceof Error ? submitError.message : "Failed to submit application. Please try again.";
-      setError(message.includes("Supabase")
-        ? "Application storage is not configured on this deployment."
-        : message);
+      const message =
+        submitError instanceof Error
+          ? submitError.message
+          : "Failed to submit application. Please try again.";
+      setError(message);
       console.error(submitError);
+    } finally {
+      setSubmitting(false);
     }
   };
 

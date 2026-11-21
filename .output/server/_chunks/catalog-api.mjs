@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import { randomUUID } from "node:crypto";
+import { timingSafeEqual, randomUUID, createHmac } from "node:crypto";
 import { fileURLToPath } from "node:url";
 const assetsJson = [
   {
@@ -1017,6 +1017,14 @@ const extraValidatorsJson = [
     responseTime: "24-48 hours"
   }
 ];
+const bundledLogs = [
+  {
+    name: "0e001c7b-1fea-4aaf-b6ea-4373955dda1d.log",
+    label: "SERVER (0e001c7b-1fea-4aaf-b6ea-4373955dda1d)",
+    lastSeen: "2026-11-16T20:53:27.253Z",
+    text: "time: 2026-11-15T00:57:19.215Z\nevent: sync\nprojectRoot: D:\\Myproject\\Code_Project\\RWA_Project\\RWA_new\nassets: 5\nvalidators: 5\nusers: 3\ntransactions: 3\nvalidations: 3\ndashboardAssets: 9\nmarketplaceAssets: 8\nextraValidators: 12\n\ntime: 2026-11-15T01:15:25.461Z\nevent: sync\nprojectRoot: D:\\Myproject\\Code_Project\\RWA_Project\\RWA_new\nassets: 5\nvalidators: 5\nusers: 3\ntransactions: 3\nvalidations: 3\ndashboardAssets: 9\nmarketplaceAssets: 8\nextraValidators: 12\n\ntime: 2026-11-15T01:15:32.518Z\nevent: sync\nprojectRoot: D:\\Myproject\\Code_Project\\RWA_Project\\RWA_new\nassets: 5\nvalidators: 5\nusers: 3\ntransactions: 3\nvalidations: 3\ndashboardAssets: 9\nmarketplaceAssets: 8\nextraValidators: 12\n\ntime: 2026-11-15T01:37:22.547Z\npcName: SERVER\npcId: 0e001c7b-1fea-4aaf-b6ea-4373955dda1d\nrequestedAt: 2026-11-15T01:37:22.501Z\nassets: 5\nvalidators: 5\nusers: 3\ntransactions: 3\nvalidations: 3\ndashboardAssets: 9\nmarketplaceAssets: 8\nextraValidators: 12\n\ntime: 2026-11-15T01:38:54.267Z\npcName: SERVER\npcId: 0e001c7b-1fea-4aaf-b6ea-4373955dda1d\nprojectRoot: D:\\Myproject\\Code_Project\\RWA_Project\\RWA_new\nrequestedAt: 2026-11-15T01:38:54.214Z\nassets: 5\nvalidators: 5\nusers: 3\ntransactions: 3\nvalidations: 3\ndashboardAssets: 9\nmarketplaceAssets: 8\nextraValidators: 12\n\ntime: 2026-11-15T01:39:57.334Z\npcName: SERVER\npcId: 0e001c7b-1fea-4aaf-b6ea-4373955dda1d\nprojectRoot: D:\\Myproject\\Code_Project\\RWA_Project\\RWA_new\nrequestedAt: 2026-11-15T01:39:57.310Z\nassets: 5\nvalidators: 5\nusers: 3\ntransactions: 3\nvalidations: 3\ndashboardAssets: 9\nmarketplaceAssets: 8\nextraValidators: 12\n\ntime: 2026-11-15T01:40:12.240Z\npcName: SERVER\npcId: 0e001c7b-1fea-4aaf-b6ea-4373955dda1d\nprojectRoot: D:\\Myproject\\Code_Project\\RWA_Project\\RWA_new\nrequestedAt: 2026-11-15T01:40:12.216Z\nassets: 5\nvalidators: 5\nusers: 3\ntransactions: 3\nvalidations: 3\ndashboardAssets: 9\nmarketplaceAssets: 8\nextraValidators: 12\n\ntime: 2026-11-16T20:21:02.869Z\npcName: SERVER\npcId: 0e001c7b-1fea-4aaf-b6ea-4373955dda1d\nprojectRoot: D:\\Myproject\\Code_Project\\RWA_Project\\RWA_new\nrequestedAt: 2026-11-16T20:21:02.435Z\nassets: 5\nvalidators: 5\nusers: 3\ntransactions: 3\nvalidations: 3\ndashboardAssets: 9\nmarketplaceAssets: 8\nextraValidators: 12\n\ntime: 2026-11-16T20:22:26.224Z\npcName: SERVER\npcId: 0e001c7b-1fea-4aaf-b6ea-4373955dda1d\nprojectRoot: D:\\Myproject\\Code_Project\\RWA_Project\\RWA_new\nrequestedAt: 2026-11-16T20:22:25.968Z\nassets: 5\nvalidators: 5\nusers: 3\ntransactions: 3\nvalidations: 3\ndashboardAssets: 9\nmarketplaceAssets: 8\nextraValidators: 12\n\ntime: 2026-11-16T20:24:51.394Z\npcName: SERVER\npcId: 0e001c7b-1fea-4aaf-b6ea-4373955dda1d\nprojectRoot: D:\\Myproject\\Code_Project\\RWA_Project\\RWA_new\nrequestedAt: 2026-11-16T20:24:51.139Z\nassets: 5\nvalidators: 5\nusers: 3\ntransactions: 3\nvalidations: 3\ndashboardAssets: 9\nmarketplaceAssets: 8\nextraValidators: 12\n\ntime: 2026-11-16T20:46:13.599Z\npcName: SERVER\npcId: 0e001c7b-1fea-4aaf-b6ea-4373955dda1d\nprojectRoot: D:\\Myproject\\Code_Project\\RWA_Project\\RWA_new\nrequestedAt: 2026-11-16T20:46:13.327Z\nassets: 5\nvalidators: 5\nusers: 3\ntransactions: 3\nvalidations: 3\ndashboardAssets: 9\nmarketplaceAssets: 8\nextraValidators: 12\n\ntime: 2026-11-16T20:53:27.253Z\npcName: SERVER\npcId: 0e001c7b-1fea-4aaf-b6ea-4373955dda1d\nprojectRoot: D:\\Myproject\\Code_Project\\RWA_Project\\RWA_new\nrequestedAt: 2026-11-16T20:53:26.793Z\nassets: 5\nvalidators: 5\nusers: 3\ntransactions: 3\nvalidations: 3\ndashboardAssets: 9\nmarketplaceAssets: 8\nextraValidators: 12\n"
+  }
+];
 const here = path.dirname(fileURLToPath(import.meta.url));
 function projectRoot() {
   const candidates = [process.cwd(), path.resolve(here, "..")];
@@ -1130,7 +1138,7 @@ function safeToken(value, fallback) {
   const cleaned = String(value || "").replace(/[^\w.-]/g, "").slice(0, 80);
   return cleaned || fallback;
 }
-function appendPcLog(pcName, pcId, counts, requestedAt, projectPath) {
+async function appendPcLog(pcName, pcId, counts, requestedAt, projectPath) {
   const id = safeToken(pcId, "unknown");
   const name = String(pcName || "unknown").replace(/[\r\n]/g, " ").slice(0, 80);
   const time = (/* @__PURE__ */ new Date()).toISOString();
@@ -1163,17 +1171,17 @@ function appendPcLog(pcName, pcId, counts, requestedAt, projectPath) {
     }
     fs.writeFileSync(indexPath, JSON.stringify(index, null, 2));
   } catch (error) {
-    console.warn(`PC log was not saved (${error.message})`);
+    console.warn(`PC log file was not saved (${error.message})`);
   }
   const stamp = time.replace(/[:.]/g, "-");
   return {
-    logDir: projectPath ? path.join(projectPath, "log") : "log",
+    logDir: "log",
     logFile: `sync-${stamp}.log`,
     logText: text,
     pc: { pcId: id, pcName: name }
   };
 }
-function buildSyncCatalog(pc = {}) {
+async function buildSyncCatalog(pc = {}) {
   const assets = listAssets();
   const validators = readList("validators.json").map(rewriteMedia);
   const users = listUsers();
@@ -1198,8 +1206,8 @@ function buildSyncCatalog(pc = {}) {
       ...marketplaceAssets,
       ...extraValidators
     ]),
-    cacheDir: pc.projectRoot ? path.join(pc.projectRoot, "cache") : "cache",
-    ...appendPcLog(pc.pcName, pc.pcId, {
+    cacheDir: "cache",
+    ...await appendPcLog(pc.pcName, pc.pcId, {
       assets: assets.length,
       validators: validators.length,
       users: users.length,
@@ -1212,17 +1220,192 @@ function buildSyncCatalog(pc = {}) {
     meta: {
       version: "1",
       source: "rwahub-server",
-      projectRoot: pc.projectRoot || null
+      projectRoot: null
     }
   };
 }
-function handleCatalog(method, pathname, body = {}) {
+function escapeHtml(value) {
+  return String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+function readPcIndex() {
+  const indexPath = path.join(logsDir, "pcs.json");
+  if (!fs.existsSync(indexPath)) return [];
+  try {
+    const parsed = JSON.parse(fs.readFileSync(indexPath, "utf8"));
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+function adminPassword() {
+  return process.env.ADMIN_PASSWORD || "";
+}
+function adminCookieValue() {
+  const password = adminPassword();
+  if (!password) return "";
+  return createHmac("sha256", password).update("rwahub-server-log").digest("hex");
+}
+function readCookie(cookieHeader, name) {
+  const match = String(cookieHeader || "").match(new RegExp(`(?:^|;\\s*)${name}=([^;]+)`));
+  return match ? decodeURIComponent(match[1]) : "";
+}
+function isAdmin(cookieHeader) {
+  const expected = adminCookieValue();
+  const actual = readCookie(cookieHeader, "rwahub_admin");
+  if (!expected || !actual || expected.length !== actual.length) return false;
+  return timingSafeEqual(Buffer.from(expected), Buffer.from(actual));
+}
+function readDiskLogs() {
+  const index = readPcIndex();
+  const files = fs.existsSync(logsDir) ? fs.readdirSync(logsDir).filter((name) => /^[\w.-]+\.log$/.test(name)) : [];
+  return files.map((name) => {
+    const pc = index.find((item) => `${item.pcId}.log` === name);
+    return {
+      name,
+      label: pc ? `${pc.pcName} (${pc.pcId})` : name,
+      lastSeen: pc?.lastSeen || "",
+      text: fs.readFileSync(path.join(logsDir, name), "utf8")
+    };
+  });
+}
+async function readStoredLogs() {
+  const logs = /* @__PURE__ */ new Map();
+  for (const item of bundledLogs) {
+    if (item?.name && /^[\w.-]+\.log$/.test(item.name)) logs.set(item.name, item);
+  }
+  for (const item of readDiskLogs()) {
+    const current = logs.get(item.name);
+    if (!current || item.text.length >= current.text.length) logs.set(item.name, item);
+  }
+  return [...logs.values()];
+}
+function passwordsMatch(input, expected) {
+  const left = Buffer.from(String(input || ""));
+  const right = Buffer.from(String(expected || ""));
+  if (!right.length || left.length !== right.length) return false;
+  return timingSafeEqual(left, right);
+}
+function renderLoginPage(message) {
+  const note = message ? `<p class="error">${escapeHtml(message)}</p>` : "";
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin log</title>
+  <style>
+    body { font-family: Segoe UI, sans-serif; margin: 2rem; color: #111; }
+    form { display: grid; gap: 0.75rem; max-width: 320px; }
+    input { padding: 0.5rem; }
+    .error { color: #9b1c1c; }
+  </style>
+</head>
+<body>
+  <h1>Admin log</h1>
+  ${note}
+  <form method="post" action="/server-log/login">
+    <label for="password">Admin password</label>
+    <input id="password" name="password" type="password" autocomplete="current-password" required />
+    <button type="submit">Open log</button>
+  </form>
+</body>
+</html>`;
+}
+function pcNameFromLabel(label) {
+  return String(label || "").replace(/\s*\([^)]*\)$/, "") || label;
+}
+async function renderServerLogPage(fileName) {
+  const logs = await readStoredLogs();
+  const selected = logs.find((item) => item.name === fileName);
+  const links = logs.map((log) => {
+    const active = selected && selected.name === log.name ? ' class="active"' : "";
+    return `<a${active} href="/server-log/${encodeURIComponent(log.name)}">${escapeHtml(pcNameFromLabel(log.label))}</a>`;
+  }).join("");
+  let detail = '<p class="empty">Select a PC log.</p>';
+  let summary = "Detail";
+  if (fileName && (!/^[\w.-]+\.log$/.test(fileName) || !selected)) {
+    summary = "Detail";
+    detail = '<p class="empty">Log file not found.</p>';
+  } else if (selected) {
+    summary = escapeHtml(selected.label);
+    const seen = selected.lastSeen ? `<p class="meta">${escapeHtml(selected.lastSeen)}</p>` : "";
+    detail = `${seen}<pre>${escapeHtml(selected.text)}</pre>`;
+  }
+  const open = selected ? " open" : "";
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Server log</title>
+  <style>
+    body { font-family: Segoe UI, sans-serif; margin: 0; color: #111; }
+    h1 { margin: 0; padding: 1.25rem 1.5rem 0; }
+    .layout { display: grid; grid-template-columns: 240px minmax(0, 1fr); min-height: calc(100vh - 4rem); }
+    .pc-list { border-right: 1px solid #ddd; padding: 1rem 0; }
+    .pc-list a { display: block; padding: 0.7rem 1.25rem; color: inherit; text-decoration: none; }
+    .pc-list a.active { background: #e8f0fe; font-weight: 650; }
+    .detail { padding: 1rem 1.5rem 2rem; }
+    details { border: 1px solid #ddd; border-radius: 8px; background: #fff; }
+    summary { cursor: pointer; padding: 0.8rem 1rem; font-weight: 650; }
+    .meta { margin: 0; padding: 0 1rem; color: #555; font-size: 0.9rem; }
+    pre { white-space: pre-wrap; background: #f4f4f4; margin: 0.75rem; padding: 1rem; border-radius: 8px; }
+    .empty { margin: 0; padding: 0 1rem 1rem; color: #555; }
+    @media (max-width: 720px) { .layout { grid-template-columns: 1fr; } .pc-list { border-right: 0; border-bottom: 1px solid #ddd; } }
+  </style>
+</head>
+<body>
+  <h1>Server log</h1>
+  <div class="layout">
+    <nav class="pc-list">${links || '<p class="empty">No logs yet.</p>'}</nav>
+    <section class="detail">
+      <details${open}>
+        <summary>${summary}</summary>
+        ${detail}
+      </details>
+    </section>
+  </div>
+</body>
+</html>`;
+}
+function loginPassword(body) {
+  if (body && typeof body === "object" && body.password) return String(body.password);
+  if (typeof body === "string") return new URLSearchParams(body).get("password") || "";
+  return "";
+}
+function adminSessionCookie() {
+  return `rwahub_admin=${encodeURIComponent(adminCookieValue())}; HttpOnly; SameSite=Lax; Path=/; Max-Age=43200`;
+}
+async function handleCatalog(method, pathname, body = {}, request = {}) {
   const parts = pathname.split("/").filter(Boolean);
+  const cookie = request.cookie || "";
+  if (method === "POST" && pathname === "/server-log/login") {
+    if (!adminPassword()) {
+      return { status: 503, contentType: "text/html; charset=utf-8", body: renderLoginPage("Admin password is not configured on the server.") };
+    }
+    if (!passwordsMatch(loginPassword(body), adminPassword())) {
+      return { status: 401, contentType: "text/html; charset=utf-8", body: renderLoginPage("Wrong password.") };
+    }
+    return {
+      status: 303,
+      contentType: "text/html; charset=utf-8",
+      body: "",
+      headers: { Location: "/server-log", "Set-Cookie": adminSessionCookie() }
+    };
+  }
+  if (method === "GET" && (pathname === "/server-log" || parts[0] === "server-log" && parts.length === 2)) {
+    if (!isAdmin(cookie)) {
+      const message = adminPassword() ? "" : "Admin password is not configured on the server.";
+      return { status: adminPassword() ? 401 : 503, contentType: "text/html; charset=utf-8", body: renderLoginPage(message) };
+    }
+    const fileName = parts.length === 2 ? decodeURIComponent(parts[1]) : "";
+    return { status: 200, contentType: "text/html; charset=utf-8", body: await renderServerLogPage(fileName) };
+  }
   if (method === "GET" && pathname === "/health") {
     return { status: 200, body: { status: "OK", service: "rwahub-server", timestamp: (/* @__PURE__ */ new Date()).toISOString() } };
   }
   if (method === "POST" && pathname === "/sync") {
-    return { status: 200, body: buildSyncCatalog(body || {}) };
+    return { status: 200, body: await buildSyncCatalog(body || {}) };
   }
   if (parts[0] === "records" && parts[1] === "assets" && parts.length === 2) {
     if (method === "GET") return { status: 200, body: listAssets() };

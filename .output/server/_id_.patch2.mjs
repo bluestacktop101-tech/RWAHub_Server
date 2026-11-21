@@ -14,7 +14,7 @@ import "node:url";
 const _id__patch = defineEventHandler(async (event) => {
   const id = getRouterParam(event, "id");
   const body = await readBody(event).catch(() => ({}));
-  const result = handleCatalog("PATCH", `/records/users/${id}`, body || {});
+  const result = await handleCatalog("PATCH", `/records/users/${id}`, body || {});
   setResponseStatus(event, result.status);
   return result.body;
 });

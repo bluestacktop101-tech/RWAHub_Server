@@ -11,7 +11,7 @@ import "node:fs";
 import "node:path";
 import "node:crypto";
 import "node:url";
-const users_get = defineEventHandler(() => handleCatalog("GET", "/records/users").body);
+const users_get = defineEventHandler(async () => (await handleCatalog("GET", "/records/users")).body);
 export {
   users_get as default
 };
