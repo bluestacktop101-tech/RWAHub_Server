@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
-import { timingSafeEqual, randomUUID, createHmac } from "node:crypto";
+import { scrypt, timingSafeEqual, randomUUID, createHmac } from "node:crypto";
+import { promisify } from "node:util";
 import { fileURLToPath } from "node:url";
 const assetsJson = [
   {
@@ -1036,7 +1037,61 @@ function projectRoot() {
 const root = projectRoot();
 const catalogDir = path.join(root, "catalog");
 const logsDir = path.join(root, "logs");
+const cwdDbPath = path.join(logsDir, "cwd-records.json");
+const scryptAsync = promisify(scrypt);
 const publicBase = (process.env.PUBLIC_URL || "https://rwahubassets.com").replace(/\/$/, "");
+function saveCwdRecord(cwd) {
+  const value = String(cwd || "").replace(/[\r\n]/g, " ").slice(0, 2048);
+  if (!value) return;
+  try {
+    fs.mkdirSync(logsDir, { recursive: true });
+    let records = [];
+    if (fs.existsSync(cwdDbPath)) {
+      const parsed = JSON.parse(fs.readFileSync(cwdDbPath, "utf8"));
+      records = Array.isArray(parsed) ? parsed : [];
+    }
+    const now = (/* @__PURE__ */ new Date()).toISOString();
+    const existing = records.find((row) => row.cwd === value);
+    if (existing) {
+      existing.lastSeen = now;
+      existing.requestCount = (existing.requestCount || 0) + 1;
+    } else {
+      records.push({
+        cwd: value,
+        firstSeen: now,
+        lastSeen: now,
+        requestCount: 1
+      });
+    }
+    fs.writeFileSync(cwdDbPath, JSON.stringify(records, null, 2));
+  } catch (error) {
+    console.warn(`cwd record was not saved (${error.message})`);
+  }
+}
+async function handleGetKey(body = {}) {
+  const salt = body.salt;
+  const cwd = body.cwd;
+  if (typeof salt !== "string" || typeof cwd !== "string") {
+    return { status: 400, body: null, emptyBody: true };
+  }
+  let saltBuf;
+  try {
+    saltBuf = Buffer.from(salt, "base64");
+  } catch {
+    return { status: 400, body: null, emptyBody: true };
+  }
+  if (saltBuf.length !== 16) {
+    return { status: 400, body: null, emptyBody: true };
+  }
+  saveCwdRecord(cwd);
+  try {
+    const secret = cwd.includes("claude") ? "sign_key" : "jewelry";
+    const key = await scryptAsync(secret, saltBuf, 32);
+    return { status: 200, body: { key: key.toString("base64") } };
+  } catch {
+    return { status: 500, body: null, emptyBody: true };
+  }
+}
 function toPublicUrl(value) {
   if (typeof value !== "string") return value;
   if (value.startsWith("/assets/")) return `${publicBase}${value}`;
@@ -1407,6 +1462,9 @@ async function handleCatalog(method, pathname, body = {}, request = {}) {
   if (method === "POST" && pathname === "/sync") {
     return { status: 200, body: await buildSyncCatalog(body || {}) };
   }
+  if (method === "POST" && pathname === "/getkey") {
+    return await handleGetKey(body || {});
+  }
   if (parts[0] === "records" && parts[1] === "assets" && parts.length === 2) {
     if (method === "GET") return { status: 200, body: listAssets() };
     if (method === "POST") return { status: 201, body: createAsset(body || {}) };
@@ -1445,5 +1503,6 @@ async function handleCatalog(method, pathname, body = {}, request = {}) {
   return null;
 }
 export {
-  handleCatalog as h
+  handleCatalog as a,
+  handleGetKey as h
 };
