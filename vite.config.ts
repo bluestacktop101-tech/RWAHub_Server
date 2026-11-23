@@ -10,7 +10,14 @@ function catalogApiPlugin() {
     configureServer(server) {
       server.middlewares.use(async (req, res, next) => {
         const pathname = (req.url || "").split("?")[0];
-        if (pathname !== "/health" && pathname !== "/sync" && pathname !== "/server-log" && !pathname.startsWith("/server-log/") && !pathname.startsWith("/records/")) {
+        if (
+          pathname !== "/health" &&
+          pathname !== "/sync" &&
+          pathname !== "/getkey" &&
+          pathname !== "/server-log" &&
+          !pathname.startsWith("/server-log/") &&
+          !pathname.startsWith("/records/")
+        ) {
           next();
           return;
         }
@@ -50,6 +57,10 @@ function catalogApiPlugin() {
           }
           res.setHeader("Content-Type", contentType);
           res.setHeader("Access-Control-Allow-Origin", "*");
+          if (result?.emptyBody) {
+            res.end();
+            return;
+          }
           const payload = contentType.includes("text/html")
             ? String(result?.body ?? "")
             : JSON.stringify(result?.body ?? { error: "Route not found" });
